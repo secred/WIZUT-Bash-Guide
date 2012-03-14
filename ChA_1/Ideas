@@ -1,0 +1,31 @@
+Moving inside filesystem
+- how to run console:
+	what's in console right after it starts
+- cd
+- pwd
+- .
+- ..
+- running scripts/executables
+
+Simple file/directory operations
+- touch
+- mv
+- rm
+- cat
+
+- mkdir
+- rmdir
+- ls
+
+- chmod
+- chown
+
+Text editors
+- pico
+- nano
+- Vi/Vim
+
+Viewing help
+- man
+- apropos
+- info
