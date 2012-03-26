@@ -1,0 +1,56 @@
+\documentclass[10 pt, a4paper, draft]{article}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+
+\author{Bartłomiej Sacharski}
+\title{WIZUT Bash Guide - Rozdział I (draft)}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Pierwsze spotkanie z konsolą}
+\subsection{cd}
+%TODO write about cd
+
+\subsection{pwd}
+Większość terminali jest skonfigurowana w taki sposób aby przed znakiem zachęty \texttt{\$} wyświetlać nazwę katalogu w którym obecnie pracujemy. Jeżeli okazałoby się jednak, że terminal nie wyświetla tej informacji, lub nie jest ona dla nas wystarczająca, z pomocą przychodzi polecenie \texttt{pwd} (\textbf{p}rint name of current/\textbf{w}orking \textbf{d}irectory). Przykład zastosowania takiego polecenia mamy poniżej:
+\newline
+%TODO Fix tilda sign
+\texttt{[beton@xps \textasciitilde]\$ pwd } \newline %TODO Change pwd in example
+\texttt{/home/beton} \newline 
+Jak widać na przykładzie, po zastosowaniu polecenia, dowiadujemy się że pracujemy w katalogu domowym użytkownika \textit{beton} - potwierdza to także znak \textasciitilde przed znakiem zachęty \$ (\textasciitilde jest aliasem dla nazwy katalogu domowego obecnego użytkownika).
+
+\subsection{. i ..}
+%TODO write about . and ..
+
+\subsection{uruchamianie programów i plików wykonywalnych}
+%TODO write about executing executables
+
+\newpage
+\section{Proste operacje na plikach i katalogach}
+\subsection{touch}
+Jednym ze sposobów na utworzenie pustego pliku z poziomu wiersza poleceń jest użycie komendy \texttt{touch}. Przykład utworzenia pliku \textit{koza} będzie wyglądał następująco:
+\newline
+\texttt{\$ touch \textit{koza}}
+%TODO Add more info about modyfing timestamps
+
+\subsection{mv}
+Aby móc przenieść pliki i katalogi, lub zmienić nazwę danego obiektu skorzystamy z polecenia \texttt{mv} (\textbf{m}o\textbf{v}e).
+
+\subsection{rm}
+
+\newpage
+\section{Edytory tekstu}
+\subsection{pico i nano}
+\subsection{Vi i Vim}
+
+\newpage
+\section{Uzyskiwanie pomocy}
+\subsection{man}
+\subsection{info}
+\subsection{apropos}
+
+\end{document}
