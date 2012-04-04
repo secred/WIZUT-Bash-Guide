@@ -2,9 +2,13 @@
 \usepackage{polski}
 \usepackage[utf8]{inputenc}
 \usepackage{listings}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{draftwatermark}
 
 \author{Bartłomiej Sacharski}
-\title{WIZUT Bash Guide - Rozdział I (draft)}
+\title{WIZUT Bash Guide - Rozdział I}
 
 \begin{document}
 \maketitle
@@ -13,8 +17,10 @@
 
 \section{Pierwsze spotkanie z konsolą}
 \subsection{cd}
-%TODO write about cd
-
+Jedną z najczęściej wykonywanych w terminalu akcji będzie prawdopodobnie zmiana katalogu w którym obecnie pracuje użytkownik. Do tego celu służy prosta komenda \texttt{cd} (\textbf{c}hange \textbf{d}irectory). Przykład zastosowania komendy mamy poniżej:
+\newline
+%TODO add cd
+%TODO possibly add cd switches
 \subsection{pwd}
 Większość terminali jest skonfigurowana w taki sposób aby przed znakiem zachęty \texttt{\$} wyświetlać nazwę katalogu w którym obecnie pracujemy. Jeżeli okazałoby się jednak, że terminal nie wyświetla tej informacji, lub nie jest ona dla nas wystarczająca, z pomocą przychodzi polecenie \texttt{pwd} (\textbf{p}rint name of current/\textbf{w}orking \textbf{d}irectory). Przykład zastosowania takiego polecenia mamy poniżej:
 \newline
@@ -32,15 +38,58 @@ Jak widać na przykładzie, po zastosowaniu polecenia, dowiadujemy się że prac
 \newpage
 \section{Proste operacje na plikach i katalogach}
 \subsection{touch}
-Jednym ze sposobów na utworzenie pustego pliku z poziomu wiersza poleceń jest użycie komendy \texttt{touch}. Przykład utworzenia pliku \textit{koza} będzie wyglądał następująco:
+Jednym ze sposobów na utworzenie pustego pliku z poziomu wiersza poleceń jest użycie komendy \texttt{touch} (jest to właściwie efekt uboczny działania tego polecenia, ale mimo to bardzo przydatny). Przykład utworzenia pliku \textit{koza} będzie wyglądał następująco:
 \newline
 \texttt{\$ touch \textit{koza}}
+\newline
+Jeżeli chcemy utworzyć na raz kilka plików możemy je utworzyć jednym poleceniem, oddzielając spacjami kolejne nazwy:
+\newline
+\texttt{\$ touch \textit{plik1 plik2 plik3}}
+\subsubsection*{Przełączniki}
 %TODO Add more info about modyfing timestamps
 
 \subsection{mv}
 Aby móc przenieść pliki i katalogi, lub zmienić nazwę danego obiektu skorzystamy z polecenia \texttt{mv} (\textbf{m}o\textbf{v}e).
+%TODO write about mv
+\subsubsection*{Przełączniki}
+%TODO add switches
 
 \subsection{rm}
+Do skasowania plików używamy polecenia \texttt{rm}(\textbf{r}e\textbf{m}ove)
+\subsubsection*{Przełączniki}
+%TODO add switches
+
+\subsection{mkdir}
+Odpowiednikiem dla polecenia touch do tworzenia jest polecenie \texttt{mkdir} (\textbf{m}a\textbf{k}e \textbf{dir}ectories. Aby utworzyć przykładowy katalog \textit{koza} za pomocą wiersza poleceń skorzystamy z komendy:
+\newline
+\texttt{\$ mkdir \textit{koza}}
+\newline 
+Oczywiście, jeżeli chcielibyśmy utworzyć taki katalog wewnątrz innego katalogu, np. \textit{łąka}, jako parametr przekażemy ścieżkę do tego katalogu:
+\newline
+\texttt{\$ mkdir \textit{łąka/koza}}
+\newline 
+Jeżeli jednak próbowalibyśmy utworzyć katalog w miejscu które nie istnieje, np. łąkaa wydając polecenie:
+\newline
+\texttt{\$ mkdir \textit{łąkaa/koza}}
+\newline
+to bez zastosowania dodatkowego przełącznika \textbf{-p} konsola zwróci błąd z komunikatem:
+\newline
+\texttt{mkdir: nie można utworzyć katalogu `łąkaa/koza': Nie ma takiego pliku ani katalogu}
+\subsubsection*{Przełączniki}
+%TODO add switches
+
+\subsection{rmdir}
+Jak łatwo się domyślić - jeżeli istnieje polecenie \texttt{mkdir}, służące do tworzenia katalogów, to istnieje również polecenie \texttt{rmdir} (\textbf{r}e\textbf{m}ove empty \textbf{dir}ectories), służące do kasowania pustych katalogów. Wywołanie operacji usuwania katalogu \textit{koza} będzie identyczne jak podczas tworzenia go:
+\newline
+\texttt{\$ rmdir \textit{koza}}
+\newline
+Pozostałe operacje jak kasowanie katalogu wewnątrz innego katalogu oraz usuwanie całej hierarchii katalogów jest analogiczne do operowania poleceniem \texttt{mkdir}.
+\newline
+\subsubsection*{Przełączniki}
+\begin{description}
+\item \textbf{-p} lub \textbf{--parents} usuwa katalog wraz z jego katalogami nadrzędnymi
+%TODO add more switches
+\end{description}
 
 \newpage
 \section{Edytory tekstu}
@@ -50,7 +99,12 @@ Aby móc przenieść pliki i katalogi, lub zmienić nazwę danego obiektu skorzy
 \newpage
 \section{Uzyskiwanie pomocy}
 \subsection{man}
+W przypadku gdy chcemy dowiedzieć się jak działa polecenie, lub sprawdzić sposób jego wywołania możemy spróbować wywołać polecenie z przełącznikiem \textbf{-?} lub \textbf{--help}. Wiele programów wyświetla wtedy bardzo ogólną informację o dostępnych przełącznikach, ich działaniu i sposobie wywołania programu. Czasem jednak potrzebujemy bardziej rozbudowanej dokumentacji - wtedy warto spróbować skorzystać z polecenia \texttt{man}(od angielskiego słowa \textbf{man}ual).
+\subsubsection*{Przełączniki}
+%TODO add switches
 \subsection{info}
 \subsection{apropos}
-
+W przypadku gdy chcemy coś zrobić, ale nie wiemy jakiego polecenia użyć, możemy skorzystać z polecenia \texttt{apropos}. Jako argument wywołania podajemy wówczas frazę jakiej poszukujemy w instrukcji, a \texttt{apropos} przeszuka wszystkie dostępne na dysku instrukcje pod kątem tejże frazy. Przykładowo, jeżeli chcielibyśmy dowiedzieć się jakie polecenie odpowiada za tworzenie katalogu  użyjemy nowopoznanej komendy z argumentem \textit{tworzy katalog}:
+\newline
+%TODO add this
 \end{document}
