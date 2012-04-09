@@ -5,7 +5,8 @@
 \usepackage{draftwatermark}
 
 \author{Krzysztof Czajkowski}
-\title{WIZUT Bash Guide - Rozdział III}
+\title{WIZUT Bash Guide - Rozdział III\\
+Wyrażenia warunkowe}
 
 \begin{document}
 \maketitle
@@ -13,7 +14,8 @@
 \newpage
 
 %TODO: Add intro for chapter, add something about if`s.
-
+\section{Wstęp}
+W tym rozdziale dowiemy się o wyrażeniach warunkowych. Wyrażenia warunkowe jako część języka skryptowego bash, pozwalają na wykonywanie przydzielonych instrukcji w zależności od wyboru użytkownika, aplikacji lub sprawdzenia czy zdefiniowane zapytanie będzie prawdą lub fałszem. Możliwość warunkowego decydowania o wykonywanym kroku jest bardzo istotna, zdecydowania większość algorytmów jej wymaga.
 \section{case}
 \subsection{Wstęp}
 %TODO: Change this text
@@ -61,17 +63,19 @@ done
 \subsection{Przykład}
 
 \lstinputlisting[language=bash]{example_select.sh}
-Uruchamiając taki skrypt, wyświetlone zostanie pytanie oraz 3 opcje do wyboru: \newline \newline
-\texttt{[czaja@vaio][\textasciitilde] \$ sh example\_select.sh} \newline
-\texttt{Wybierz katalog którego zawartość chcesz obejrzeć:} \newline
-\texttt{1) /home} \newline
-\texttt{2) /media} \newline
-\texttt{3) /mnt} \newline
-\texttt{\#?} \newline \newline
+Uruchamiając taki skrypt, wyświetlone zostanie pytanie oraz 3 opcje do wyboru: \newline
+\begin{verbatim}
+[czaja@vaio][~] $ sh example_select.sh
+Wybierz katalog którego zawartość chcesz obejrzeć:
+1) /home
+2) /media
+3) /mnt
+#?
+\end{verbatim}
 Aby dokonać wyboru wpisujemy odpowiednią cyfrę, zostanie wykonane polecenie (w tym
 wypadku \texttt{ls -la}) dla tej zmiennej. Za poleceniem \texttt{ls} znajduje się \texttt{break}, dlaczego? Pętla \texttt{select} jest pętlą wieczną, wyjście z niej możliwe jest tylko poprzez przerwanie jej.
  
-\section{użycie case i select razem}
+\section{Użycie case i select razem}
 Problem przytoczony przy omawianiu instrukcji case, można uprościć dodając instrukcję select. \newline
 \lstinputlisting[language=bash]{example_cs.sh}
 %TODO: Add comment.
