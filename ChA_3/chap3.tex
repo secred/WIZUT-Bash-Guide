@@ -1,8 +1,29 @@
-\documentclass[10 pt, a4paper, draft]{article}
+\documentclass[10 pt, a4paper]{article}
 \usepackage{polski}
 \usepackage[utf8]{inputenc}
+\usepackage{verbatim}
 \usepackage{listings}
-\usepackage{draftwatermark}
+
+\usepackage{color}
+\usepackage{textcomp}
+\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+\lstset{
+	%backgroundcolor=\color{lbcolor},
+	tabsize=4,
+	rulecolor=,
+    basicstyle=\scriptsize,
+    upquote=true,
+    aboveskip={1.5\baselineskip},
+    columns=fixed,
+    showstringspaces=false,
+    extendedchars=true,
+    breaklines=true,
+    frame=single,
+    showtabs=false,
+    showspaces=false,
+    showstringspaces=false,
+    identifierstyle=\ttfamily,
+}
 
 \author{Krzysztof Czajkowski}
 \title{WIZUT Bash Guide - Rozdział III\\
@@ -28,8 +49,7 @@ lepszym i czytelniejszym rozwiązaniem.
 \subsection{Składnia}
 Składnia case`a wygląda następująco:
 
-%\inputminted{bash}{syntax_case.sh}
-\lstinputlisting[extendedchars=true, language=bash]{syntax_case.sh}
+\lstinputlisting[language=bash]{syntax_case.sh}
 
 Jest ona bardzo prosta do zrozumienia. Pierwsza linijka zaczynająca instrukcję zawiera
 wartość zdefiniowaną przez nas w zmiennej, następnie linijki są wzorcami sprawdzającymi
@@ -46,11 +66,11 @@ wzorców zapisać komendę \texttt{esac}.
 Proste menu, prosto i czytelnie zapisane. Wpisując liczbę 1, 2 lub 3 trafimy na któryś ze
 wzorców i zostaną wykonane przypisane mu polecenia (jak widać we wzorcu 1 i 2, można
 zapisać więcej niż jedno polecenie, wystarczy oddzielić je średnikiem). Wpisanie
-czegokolwiek innego spowoduje wyświetlenie \texttt{Błędny wybór}.
+czegokolwiek innego spowoduje wyświetlenie \texttt{Bledny wybor}.
 \newline
 
 \section{select}
-%TODO Add intro.
+%TODO: Add intro.
 \subsection{Składnia}
 
 \begin{lstlisting}
@@ -66,7 +86,7 @@ done
 Uruchamiając taki skrypt, wyświetlone zostanie pytanie oraz 3 opcje do wyboru: \newline
 \begin{verbatim}
 [czaja@vaio][~] $ sh example_select.sh
-Wybierz katalog którego zawartość chcesz obejrzeć:
+Wybierz katalog ktorego zawartosc chcesz obejrzec:
 1) /home
 2) /media
 3) /mnt

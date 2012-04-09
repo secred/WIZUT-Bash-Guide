@@ -1,12 +1,12 @@
 #!/bin/bash
 echo "Menu:"
 echo "1. Aktualna data"
-echo "2. Zalogowani użytkownicy"
-echo "3. Data włączenia systemu"
+echo "2. Zalogowani uzytkownicy"
+echo "3. Data wlaczenia systemu"
 read d
 case "$d" in
     "1") echo "Data:"; date ;;
-    "2") echo "Użytkownicy:"; users ;;
+    "2") echo "Uzytkownicy:"; users ;;
     "3") who -b ;;
-    *) echo "Błędny wybór"
+    *) echo "Bledny wybor"
 esac

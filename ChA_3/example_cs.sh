@@ -1,13 +1,13 @@
 #!/bin/bash
 echo "Menu:"
-select y in "Aktualna data" "Zalogowani użytkownicy" "Data włączenia systemu" "Wyjście"
+select y in "Data" "Zalogowani userzy" "Data uruchomienia" "Wyjscie"
 do
     case "$y" in
-        "Aktualna data") echo "Data:"; date ;;
-        "Zalogowani użytkownicy") echo "Użytkownicy:"; users ;;
-        "Data włączenia systemu") who -b ;;
-        "Wyjście") exit ;;
-        *) echo "Błędny wybór"
+        "Data") echo "Data:"; date ;;
+        "Zalogowani userzy") echo "Uzytkownicy:"; users ;;
+        "Data uruchomienia") who -b ;;
+        "Wyjscie") exit ;;
+        *) echo "Bledny wybor"
     esac
 break
 done
