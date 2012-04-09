@@ -2,9 +2,6 @@
 \usepackage{polski}
 \usepackage[utf8]{inputenc}
 \usepackage{listings}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{amsfonts}
 \usepackage{draftwatermark}
 
 \author{Krzysztof Czajkowski}
@@ -30,7 +27,7 @@ lepszym i czytelniejszym rozwiązaniem.
 Składnia case`a wygląda następująco:
 
 %\inputminted{bash}{syntax_case.sh}
-\lstinputlisting[language=bash]{syntax_case.sh}
+\lstinputlisting[extendedchars=true, language=bash]{syntax_case.sh}
 
 Jest ona bardzo prosta do zrozumienia. Pierwsza linijka zaczynająca instrukcję zawiera
 wartość zdefiniowaną przez nas w zmiennej, następnie linijki są wzorcami sprawdzającymi
@@ -72,7 +69,7 @@ Uruchamiając taki skrypt, wyświetlone zostanie pytanie oraz 3 opcje do wyboru:
 \texttt{3) /mnt} \newline
 \texttt{\#?} \newline \newline
 Aby dokonać wyboru wpisujemy odpowiednią cyfrę, zostanie wykonane polecenie (w tym
-wypadku \texttt{ls –la}) dla tej zmiennej. Za poleceniem \texttt{ls} znajduje się \texttt{break}, dlaczego? Pętla \texttt{select} jest pętlą wieczną, wyjście z niej możliwe jest tylko poprzez przerwanie jej.
+wypadku \texttt{ls -la}) dla tej zmiennej. Za poleceniem \texttt{ls} znajduje się \texttt{break}, dlaczego? Pętla \texttt{select} jest pętlą wieczną, wyjście z niej możliwe jest tylko poprzez przerwanie jej.
  
 \section{użycie case i select razem}
 Problem przytoczony przy omawianiu instrukcji case, można uprościć dodając instrukcję select. \newline
