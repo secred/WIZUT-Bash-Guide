@@ -1,0 +1,81 @@
+\documentclass[10 pt, a4paper, draft]{article}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{draftwatermark}
+
+\author{Krzysztof Czajkowski}
+\title{WIZUT Bash Guide - Rozdział III}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+%TODO: Add intro for chapter, add something about if`s.
+
+\section{case}
+\subsection{Wstęp}
+%TODO: Change this text
+Wyobraźmy sobie sytuację, gdzie mamy za zadanie napisanie prostego menu z kilkoma
+opcjami do wyboru, rozwiązanie problemu wyboru opcji na warunku if wydaje się
+bezsensowne ze względu na zmuszenie do zapisania dużej ilości if`ów co powoduje brak
+czytelności kodu. Rozwiązanie tego problemu za pomocą instrukcji case będzie o wiele
+lepszym i czytelniejszym rozwiązaniem.
+
+\subsection{Składnia}
+Składnia case`a wygląda następująco:
+
+%\inputminted{bash}{syntax_case.sh}
+\lstinputlisting[language=bash]{syntax_case.sh}
+
+Jest ona bardzo prosta do zrozumienia. Pierwsza linijka zaczynająca instrukcję zawiera
+wartość zdefiniowaną przez nas w zmiennej, następnie linijki są wzorcami sprawdzającymi
+poprawność z wartością, jeśli któraś okaże się zgodna, wtedy następuje wykonanie poleceń
+przypisanych do tego wzorca i zakończenie instrukcji. Jeśli żaden ze wzorców nie będzie
+pasować, następuje wtedy wykonanie polecenia domyślnego, które oznaczone jest przez * i
+zakończenie działania instrukcji. Aby składnia była prawidłowa, należy na końcu listy
+wzorców zapisać komendę \texttt{esac}.
+
+\subsection{Przykład} 
+
+\lstinputlisting[language=bash]{example_case.sh}
+
+Proste menu, prosto i czytelnie zapisane. Wpisując liczbę 1, 2 lub 3 trafimy na któryś ze
+wzorców i zostaną wykonane przypisane mu polecenia (jak widać we wzorcu 1 i 2, można
+zapisać więcej niż jedno polecenie, wystarczy oddzielić je średnikiem). Wpisanie
+czegokolwiek innego spowoduje wyświetlenie \texttt{Błędny wybór}.
+\newline
+
+\section{select}
+%TODO Add intro.
+\subsection{Składnia}
+
+\begin{lstlisting}
+select zmienna in lista
+do
+	polecenie
+done
+\end{lstlisting}
+
+\subsection{Przykład}
+
+\lstinputlisting[language=bash]{example_select.sh}
+Uruchamiając taki skrypt, wyświetlone zostanie pytanie oraz 3 opcje do wyboru: \newline \newline
+\texttt{[czaja@vaio][\textasciitilde] \$ sh example\_select.sh} \newline
+\texttt{Wybierz katalog którego zawartość chcesz obejrzeć:} \newline
+\texttt{1) /home} \newline
+\texttt{2) /media} \newline
+\texttt{3) /mnt} \newline
+\texttt{\#?} \newline \newline
+Aby dokonać wyboru wpisujemy odpowiednią cyfrę, zostanie wykonane polecenie (w tym
+wypadku \texttt{ls –la}) dla tej zmiennej. Za poleceniem \texttt{ls} znajduje się \texttt{break}, dlaczego? Pętla \texttt{select} jest pętlą wieczną, wyjście z niej możliwe jest tylko poprzez przerwanie jej.
+ 
+\section{użycie case i select razem}
+Problem przytoczony przy omawianiu instrukcji case, można uprościć dodając instrukcję select. \newline
+\lstinputlisting[language=bash]{example_cs.sh}
+%TODO: Add comment.
+\end{document}
