@@ -10,20 +10,25 @@
 \lstset{
 	%backgroundcolor=\color{lbcolor},
 	tabsize=4,
-	rulecolor=,
-    basicstyle=\scriptsize,
+	%rulecolor=,
+    %basicstyle=\scriptsize,
     upquote=true,
     aboveskip={1.5\baselineskip},
     columns=fixed,
     showstringspaces=false,
     extendedchars=true,
     breaklines=true,
-    frame=single,
+    %frame=single,
     showtabs=false,
     showspaces=false,
     showstringspaces=false,
     identifierstyle=\ttfamily,
+    numbers=left, 
+    numberstyle=\tiny, 
+    stepnumber=1, 
+    numbersep=5pt,
 }
+%TODO: Configure listing.
 
 \author{Krzysztof Czajkowski}
 \title{WIZUT Bash Guide - Rozdział III\\
@@ -37,6 +42,39 @@ Wyrażenia warunkowe}
 %TODO: Add intro for chapter, add something about if`s.
 \section{Wstęp}
 W tym rozdziale dowiemy się o wyrażeniach warunkowych. Wyrażenia warunkowe jako część języka skryptowego bash, pozwalają na wykonywanie przydzielonych instrukcji w zależności od wyboru użytkownika, aplikacji lub sprawdzenia czy zdefiniowane zapytanie będzie prawdą lub fałszem. Możliwość warunkowego decydowania o wykonywanym kroku jest bardzo istotna, zdecydowania większość algorytmów jej wymaga.
+\section{if}
+\subsection{Wstęp}
+Instrukcja warunkowa if jest jedną z najpopularniejszych instrukcji.
+\subsection{Składnia}
+Podstawowa składnia wygląda następująco:
+\begin{lstlisting}
+if warunek
+then
+	polecenie
+fi
+\end{lstlisting}
+Składnie rozpoczyna się od wyrazu \texttt{if}, po słowie \texttt{then} umieszczone są polecenia do wykonania. Instrukcja kończy się słowem \texttt{fi}. Warunek jest wyrażeniem logicznym, instrukcja if sprawdza czy jest ono prawdą. W zależności od tego zostaje wykonywane polecenie lub nie.\newline
+A co jeśli potrzebujemy też wydać polecenia w razie negatywnego wyniku? Składnia \texttt{if} posiada polecenie \texttt{else}, po którego umieszczeniu uzyskamy taką możliwość.
+\begin{lstlisting}
+if warunek
+then
+	polecenie
+else
+	polecenie2
+fi
+\end{lstlisting}
+A co jeśli mamy do rozpatrzenia więcej niż jeden warunek? Istnieje polecenie \texttt{elif} pozwalające rozpatrywać kolejne warunki.
+\begin{lstlisting}
+if warunek
+then
+	polecenie
+elif warunek2
+then
+	polecenie2
+else
+	polecenie3
+fi
+\end{lstlisting}
 \section{case}
 \subsection{Wstęp}
 %TODO: Change this text
@@ -95,7 +133,7 @@ Wybierz katalog ktorego zawartosc chcesz obejrzec:
 Aby dokonać wyboru wpisujemy odpowiednią cyfrę, zostanie wykonane polecenie (w tym
 wypadku \texttt{ls -la}) dla tej zmiennej. Za poleceniem \texttt{ls} znajduje się \texttt{break}, dlaczego? Pętla \texttt{select} jest pętlą wieczną, wyjście z niej możliwe jest tylko poprzez przerwanie jej.
  
-\section{Użycie case i select razem}
+\section{Zastosowanie case i select}
 Problem przytoczony przy omawianiu instrukcji case, można uprościć dodając instrukcję select. \newline
 \lstinputlisting[language=bash]{example_cs.sh}
 %TODO: Add comment.
