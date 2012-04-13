@@ -1,58 +1,183 @@
-\documentclass[10 pt, a4paper, draft]{article}
+\documentclass[10 pt, a4paper, draft]{report}
 \usepackage{polski}
 \usepackage[utf8]{inputenc}
-\usepackage{listings}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsfonts}
 \usepackage{draftwatermark}
+\usepackage{makeidx}
+\usepackage{hyperref}
 
 \author{Bartłomiej Sacharski}
 \title{WIZUT Bash Guide - Rozdział I}
+\makeindex
 
 \begin{document}
 \maketitle
 \tableofcontents
 \newpage
 
+\chapter{Podstawy operowania wierszem poleceń}
+Drogi Czytelniku! \newline
+Witamy w pierwszym rozdziale krótkiego skryptu . %TODO dodać tytuł
+W tej sekcji spróbujemy zapoznać Cię z podstawami obsługi wiersza poleceń systemów z rodziny Linuks. Oczywiście, rozumiemy Twoje zdziwienie - jak w czasach monitorów Full HD i interfejsów dotykowych, można korzystać jeszcze z czegoś tak przestarzałego jak wiersz poleceń. Nic bardziej mylnego - tryb tekstowy ma się bardzo dobrze i jest używany przez miliony osób na całym świecie. Gwarantujemy że po zapoznaniu się z całą książką sam stwierdzisz że niektóre operacje szybciej jest "wystukać" niż "wyklikać".
+
 \section{Pierwsze spotkanie z konsolą}
-\subsection{cd}
-Jedną z najczęściej wykonywanych w terminalu akcji będzie prawdopodobnie zmiana katalogu w którym obecnie pracuje użytkownik. Do tego celu służy prosta komenda \texttt{cd} (\textbf{c}hange \textbf{d}irectory). Przykład zastosowania komendy mamy poniżej:
-\newline
-%TODO add cd
-%TODO possibly add cd switches
+Podczas swojej nauki będziesz korzystał z tzw. emulatora terminala\index{terminal} - w dawnych czasach było to urządzenie pozwalające na pracę z komputerem, często była to klawiatura służąca do wprowadzania informacji oraz monitor lub drukarka do wyprowadzania danych. Wraz z postępem technologicznym terminale zostały zastąpione wirtualnymi odpowiednikami - właśnie takim wirtualnym terminalem będziemy się posługiwać. Bardzo możliwe że będziesz korzystać z PuTTY, Konsole lub gnome-terminal. Jeśli jednak Twój program nazywa się inaczej to nie przejmuj się - nie ma to w tym przypadku większego znaczenia.
+
+\subsection{Tuż po uruchomieniu}
+Ze sporą dozą prawdopodobieństwa można założyć, że na ekranie zostanie wyświetlony tekst wyglądający mniej-więcej tak:
+\begin{verbatim}
+[beton@xps ~]$ 
+\end{verbatim}
+W tym krótkim tekście zawartych jest sporo informacji - pracujemy obecnie jako użytkownik \textit{beton} na maszynie zwanej \textit{xps} i katalogiem w którym obecnie się znajdujemy jest katalog domowy (oznaczany często znakiem \textasciitilde). Kolejnym znakiem który informuje nas o stanie terminala jest znak \$ (\index{znak zachęty}nazywany znakiem zachęty). Pojawienie się tego znaku oznacza że terminal nie wykonuje w tym momencie żadnej operacji i można wprowadzić nowe polecenie. Co ciekawe, jeżeli zdarzy się Wam pracować na koncie z uprawnieniami administratora systemu \index{root}(konto root) zauważycie pewnie że zamiast znaku zachęty \$ pojawi się znak \# - takie rozróżnienie jest często wykorzystywane w instrukcjach opisujących wykonanie czegoś za pomocą wiersza poleceń; polecenia wykonywane za pomocą konta administratora będą się zaczynały właśnie od tego znaku.
+
+\section{Poruszanie się w systemie plików}
 \subsection{pwd}
-Większość terminali jest skonfigurowana w taki sposób aby przed znakiem zachęty \texttt{\$} wyświetlać nazwę katalogu w którym obecnie pracujemy. Jeżeli okazałoby się jednak, że terminal nie wyświetla tej informacji, lub nie jest ona dla nas wystarczająca, z pomocą przychodzi polecenie \texttt{pwd} (\textbf{p}rint name of current/\textbf{w}orking \textbf{d}irectory). Przykład zastosowania takiego polecenia mamy poniżej:
-\newline
-%TODO Fix tilda sign
-\texttt{[beton@xps \textasciitilde]\$ pwd } \newline %TODO Change pwd in example
-\texttt{/home/beton} \newline 
-Jak widać na przykładzie, po zastosowaniu polecenia, dowiadujemy się że pracujemy w katalogu domowym użytkownika \textit{beton} - potwierdza to także znak \textasciitilde przed znakiem zachęty \$ (\textasciitilde jest aliasem dla nazwy katalogu domowego obecnego użytkownika).
+Jak już wspomniałem większość terminali jest skonfigurowana w taki sposób aby przed znakiem zachęty wyświetlać nazwę katalogu w którym obecnie pracujemy. Jeżeli okazałoby się jednak, że terminal nie wyświetla tej informacji, lub nie jest ona dla nas wystarczająca, z pomocą przychodzi polecenie \texttt{pwd} (\textbf{p}rint name of current/\textbf{w}orking \textbf{d}irectory). Dla zademonstrowania polecenia wywołamy \texttt{pwd} będąc w katalogu domowym użytkownika \textit{beton}.
+\begin{verbatim}
+[beton@xps ~]$ pwd
+/home/beton
+\end{verbatim} 
+Jak widać na przykładzie, po zastosowaniu polecenia, dowiadujemy się że pracujemy w katalogu domowym użytkownika \textit{beton} - potwierdza to także znak \textasciitilde przed znakiem zachęty \$.
+
+\subsection{cd}
+Jedną z najczęściej wykonywanych w terminalu akcji będzie prawdopodobnie zmiana katalogu w którym obecnie pracuje użytkownik. Do tego celu służy prosta komenda \texttt{cd} (\textbf{c}hange \textbf{d}irectory). W przykładzie podanym poniżej zademonstrujemy jak przenieść się z obecnego katalogu, do katalogu \textit{/} (katalogu głównego):
+\begin{verbatim}
+[beton@xps ~]$ cd /
+[beton@xps /]$ pwd
+/
+[beton@xps /]$ 
+\end{verbatim}
+%TODO possibly add cd switches
+
+\subsection{ls}
+Przydatnym poleceniem do wyświetlania zawartości katalogu jest polecenie \texttt{ls} (\textbf{l}i\textbf{s}t directory contents). W przypadku wywołania \texttt{ls} bez żadnego dodatkowego argumentu ani przełącznika będzie skutkowało wyświetleniem zawartości obecnego katalogu w prostej formie, której przykład można zobaczyć poniżej:
+\begin{verbatim}
+[beton@xps ~]$ ls
+Dokumenty  Obrazy   Programy   Pulpit    Wideo
+Muzyka     Pobrane  Publiczny  Szablony
+\end{verbatim}
+W tym przypadku polecenie wywołane było w katalogu domowym użytkownika \textit{beton} (nie przejmujcie się, jeżeli wasz katalog domowy wygląda inaczej). \newline
+
+Komenda posiada wiele przełączników, jednym z nich jest używany bardzo często \textbf{-l} powodujący wyświetlanie każdego elementu w katalogu wraz ze szczegółami - m.in prawami dostępu, właścicielem i datą ostatniej modyfikacji.
+\begin{verbatim}
+[beton@xps ~]$ ls -l
+razem 44
+drwxr-xr-x.  9 beton beton 4096 04-07 13:27 Dokumenty
+drwxr-xr-x. 11 beton beton 4096 04-06 11:00 Muzyka
+drwxr-xr-x.  6 beton beton 4096 04-03 17:34 Obrazy
+drwxr-xr-x.  9 beton beton 4096 04-10 16:26 Pobrane
+drwxrwxr-x.  5 beton beton 4096 03-12 10:19 Programy
+drwxr-xr-x.  2 beton beton 4096 03-01 20:41 Publiczny
+drwxr-xr-x.  2 beton beton 4096 04-10 08:37 Pulpit
+drwxr-xr-x.  2 beton beton 4096 03-01 20:41 Szablony
+drwxr-xr-x.  6 beton beton 4096 03-13 12:17 Wideo
+\end{verbatim}
+Kolejnym przełącznikiem jaki wyróżnimy poprzez pokazanie Ci jego działania, jest przełącznik \textbf{-a}, wyłączający wyświetlanie plików i katalogów ukrytych (w systemach z rodziny Linuks takie pliki i katalogi zaczynają swoje nazwy od znaku kropki.
+\begin{verbatim}
+[beton@xps ~]$ ls -a
+.                    .grl-podcasts              Pulpit
+..                   .gstreamer-0.10            .pulse
+.abrt                .gtk-bookmarks             .pulse-cookie
+.adobe               .gvfs                      .setroubleshoot
+.android             .htoprc                    .shotwell
+.bash_history        .ICEauthority              .Skype
+.bash_logout         .icons                     .ssh
+.bash_profile        .imsettings.log            streching.png
+\end{verbatim}
+\subsubsection*{Przełączniki}
+\begin{description}
+\item \textbf{-a} lub \textbf{--all} wyłącza ukrywania katalogów zaczynających się od .
+\item \textbf{-l} użycie długiego formatu wyjściowego wyświetlającego wynik w formie listy
+\end{description}
 
 \subsection{. i ..}
-%TODO write about . and ..
+Wprawne oko zauważy pewnie dwa elementy w poprzednim listingu które nie były dotychczas wytłumaczone - \texttt{.} i \texttt{..} - czasem zdarzy się że będziemy chcieli wskazać na katalog w którym obecnie się znajdujemy (zauważymy to zwłaszcza podczas uruchamiania plików wykonywalnych). Taką etykietą jest znak \texttt{.} (znak kropki).
+%TODO add more about .
+\newline
+\newline
+Etykieta \texttt{..} wskazuje na katalog znajdujący się wyżej w hierarchii wobec katalogu w którym obecnie się znajdujemy. Aby łatwiej zrozumieć sens istnienia takiej etykiety zademonstrujemy dwa przykłady - bez i z zastosowaniem \texttt{..}:
+\newline
+\begin{verbatim}
+[beton@xps ~] pwd
+/home/beton
+[beton@xps ~] cd /home
+[beton@xps ~] pwd
+/home
+\end{verbatim}
+\begin{verbatim}
+[beton@xps ~] pwd
+/home/beton
+[beton@xps ~] cd ..
+[beton@xps ~] pwd
+/home
+\end{verbatim}
+Przykład pierwszy pokazuje przejście do katalogu wyżej poprzez podanie bezwzględnej ścieżki do tegoż katalogu. Chociaż w przykładzie nie jest to skomplikowana ścieżka, dla innych katalogów może być to seria katalogów w katalogach; przepisywanie całości może okazać się męczące i nieefektywne. Dodatkowo podejście takie utrudnia pisanie skryptów.
+\newline
+\newline
+Przykład drugi używa jako ścieżkę do katalogu wyżej etykiety \texttt{..} - dzięki niej nie musimy znać pełnej ścieżki do katalogu. Dodatkowo znacznie łatwiej zastosować ją w naszych skryptach.
 
 \subsection{uruchamianie programów i plików wykonywalnych}
-%TODO write about executing executables
+Uruchamianie programów może się odbywać na kilka sposobów, z jednego z nich korzystaliśmy nawet kilka razy podczas opisywania poleceń powyżej. Jeżeli katalog w którym znajduje się nasz program jest dopisany do zmiennej środowiskowej \texttt{PATH} (co to jest zmienna środowiskowa wyjaśnimy Ci później), to wystarczy podać nazwę pliku, a program się wykona. Dokładnie w taki sposób wywoływaliśmy polecenie \texttt{pwd}. Dla zademonstrowania działania zmiennej środowiskowej wyświetlę Ci jej przykładową zawartość (o wyświetlaniu tekstu na ekranie konsoli dowiesz się w następnych rozdziałach).
+\begin{verbatim}
+[beton@xps ~]$ echo $PATH
+/usr/local/bin:/usr/bin:/bin
+\end{verbatim}
+W powyższym przypadku zmienna wskazuje na trzy katalogi: \texttt{/usr/local/bin}, \texttt{/usr/bin} i \texttt{/bin}. Oznacza to że do wszystkich programów umieszczonych wewnątrz nich można się odwołać poprzez podanie nazwy pliku z programem.
+\newline
+Spróbujmy teraz innego podejścia - programy można uruchamiać również poprzez podanie adresu bezwzględnego\index{adres bezwzględny} do pliku wykonywalnego (oznacza to podanie pełnej ścieżki do pliku, z uwzględnieniem katalogu głównego). Dla przykładu wywołamy tak polecenie \texttt{pwd} (znajduje się ono w \texttt{/bin}).
+\begin{verbatim}
+[beton@xps ~]$ /bin/pwd
+/home/beton
+\end{verbatim}
+Ostatnim podejściem które będziemy stosować jest podawanie adresu względnego\index{adres względny} do pliku (oznacza to że podawać będziemy ścieżkę do pliku względem katalogu w którym pracujemy obecnie). Wywołanie jest bardzo podobne do używania adresu bezwzględnego, jednak ścieżkę do pliku poprzedzamy znakiem kropki. Tak jak w poprzednich dwóch przykładach posłużymy się poleceniem \texttt{pwd} - różnica będzie taka, że program będziemy wywoływać z katalogu w którym znajduje się plik wykonywalny.
+\begin{verbatim}
+[beton@xps ~]$ cd /bin
+[beton@xps bin]$ ./pwd 
+/bin
+[beton@xps bin]$ 
+\end{verbatim}
+Istotną rzeczą o której należy pamiętać przy wykonywaniu plików jest posiadanie uprawnień do wykonywania danego programu - jeżeli nie będziemy ich posiadać, to wywołanie zakończy się błędem (o uprawnieniach możesz przeczytać w rozdziale ...) %TODO add reference to the section containing file rights.
 
-\newpage
 \section{Proste operacje na plikach i katalogach}
 \subsection{touch}
 Jednym ze sposobów na utworzenie pustego pliku z poziomu wiersza poleceń jest użycie komendy \texttt{touch} (jest to właściwie efekt uboczny działania tego polecenia, ale mimo to bardzo przydatny). Przykład utworzenia pliku \textit{koza} będzie wyglądał następująco:
-\newline
-\texttt{\$ touch \textit{koza}}
-\newline
+\begin{verbatim}
+[beton@xps ~]$ ls
+Dokumenty  Obrazy   Programy   Pulpit    Wideo
+Muzyka     Pobrane  Publiczny  Szablony
+[beton@xps ~]$ touch koza
+[beton@xps ~]$ ls
+Dokumenty  Muzyka  Pobrane   Publiczny  Szablony  koza
+Obrazy  Programy   Pulpit    Wideo
+\end{verbatim}
 Jeżeli chcemy utworzyć na raz kilka plików możemy je utworzyć jednym poleceniem, oddzielając spacjami kolejne nazwy:
-\newline
-\texttt{\$ touch \textit{plik1 plik2 plik3}}
+\begin{verbatim}
+[beton@xps ~]$ touch plik1 plik2 plik3
+\end{verbatim}
 \subsubsection*{Przełączniki}
 %TODO Add more info about modyfing timestamps
 
 \subsection{mv}
-Aby móc przenieść pliki i katalogi, lub zmienić nazwę danego obiektu skorzystamy z polecenia \texttt{mv} (\textbf{m}o\textbf{v}e).
+Aby móc przenieść pliki i katalogi, lub zmienić nazwę danego obiektu skorzystamy z polecenia \texttt{mv} (\textbf{m}o\textbf{v}e). Polecenie wywołujemy z co najmniej dwoma parametrami - pierwszym jest plik źródłowy, a drugim jest plik lub katalog do którego ma trafić plik źródłowy. Przykładowo aby zmienić nazwę pliku z \textit{koza} na \textit{kózka} wywołamy polecenie \texttt{mv} w następujący sposób:
+\begin{verbatim}
+[beton@xps ~]$ mv koza kózka
+\end{verbatim}
+Podobnie wygląda przenoszenie plików - aby przenieść plik \textit{koza} znajdujący się w katalogu \textit{łąka} do katalogu \textit{zagroda} wywołamy \texttt{mv} w następujący sposób:
+\begin{verbatim}
+[beton@xps ~]$ mv łąka/koza zagroda/
+\end{verbatim}
+Jak już wcześniej wspomniałem, \texttt{mv} jest wywoływany z co najmniej dwoma parametrami - oznacza to że możemy określić wiele plików lub katalogów które chcemy przenieść (miejsce docelowe może być jednak tylko jedno).
+\begin{verbatim}
+[beton@xps ~]$ mv plik1 plik2 plik3 katalog_na_pliki/
+\end{verbatim}
 %TODO write about mv
 \subsubsection*{Przełączniki}
 %TODO add switches
+
+\subsection{cp}
+%TODO write about cp
 
 \subsection{rm}
 Do skasowania plików używamy polecenia \texttt{rm}(\textbf{r}e\textbf{m}ove)
@@ -61,28 +186,29 @@ Do skasowania plików używamy polecenia \texttt{rm}(\textbf{r}e\textbf{m}ove)
 
 \subsection{mkdir}
 Odpowiednikiem dla polecenia touch do tworzenia jest polecenie \texttt{mkdir} (\textbf{m}a\textbf{k}e \textbf{dir}ectories. Aby utworzyć przykładowy katalog \textit{koza} za pomocą wiersza poleceń skorzystamy z komendy:
-\newline
-\texttt{\$ mkdir \textit{koza}}
-\newline 
+\begin{verbatim}
+[beton@xps ~]$ mkdir koza
+\end{verbatim}
 Oczywiście, jeżeli chcielibyśmy utworzyć taki katalog wewnątrz innego katalogu, np. \textit{łąka}, jako parametr przekażemy ścieżkę do tego katalogu:
-\newline
-\texttt{\$ mkdir \textit{łąka/koza}}
-\newline 
+\begin{verbatim}
+[beton@xps ~]$ mv łąka/koza
+\end{verbatim}
 Jeżeli jednak próbowalibyśmy utworzyć katalog w miejscu które nie istnieje, np. łąkaa wydając polecenie:
-\newline
-\texttt{\$ mkdir \textit{łąkaa/koza}}
-\newline
+\begin{verbatim}
+[beton@xps ~]$ mv łąkaa/koza
+\end{verbatim}
 to bez zastosowania dodatkowego przełącznika \textbf{-p} konsola zwróci błąd z komunikatem:
-\newline
-\texttt{mkdir: nie można utworzyć katalogu `łąkaa/koza': Nie ma takiego pliku ani katalogu}
+\begin{verbatim}
+mkdir: nie można utworzyć katalogu `łąkaa/koza': Nie ma takiego pliku ani katalogu
+\end{verbatim}
 \subsubsection*{Przełączniki}
 %TODO add switches
 
 \subsection{rmdir}
 Jak łatwo się domyślić - jeżeli istnieje polecenie \texttt{mkdir}, służące do tworzenia katalogów, to istnieje również polecenie \texttt{rmdir} (\textbf{r}e\textbf{m}ove empty \textbf{dir}ectories), służące do kasowania pustych katalogów. Wywołanie operacji usuwania katalogu \textit{koza} będzie identyczne jak podczas tworzenia go:
-\newline
-\texttt{\$ rmdir \textit{koza}}
-\newline
+\begin{verbatim}
+[beton@xps ~]$ rmdir koza
+\end{verbatim}
 Pozostałe operacje jak kasowanie katalogu wewnątrz innego katalogu oraz usuwanie całej hierarchii katalogów jest analogiczne do operowania poleceniem \texttt{mkdir}.
 \newline
 \subsubsection*{Przełączniki}
@@ -91,12 +217,12 @@ Pozostałe operacje jak kasowanie katalogu wewnątrz innego katalogu oraz usuwan
 %TODO add more switches
 \end{description}
 
-\newpage
 \section{Edytory tekstu}
-\subsection{pico i nano}
+\subsection{nano i pico}
+Do prostej edycji plików z poziomu wiersza poleceń możesz skorzystać z programu \texttt{nano} (który jest rozbudowanym klonem edytora \texttt{pico}).
 \subsection{Vi i Vim}
+Edytorami które oferując znacznie więcej możliwości (ale są zarazem znacznie bardziej skomplikowane) są \texttt{vi} i \texttt{vim} (\textbf{V}i \textbf{IM}proved).
 
-\newpage
 \section{Uzyskiwanie pomocy}
 \subsection{man}
 W przypadku gdy chcemy dowiedzieć się jak działa polecenie, lub sprawdzić sposób jego wywołania możemy spróbować wywołać polecenie z przełącznikiem \textbf{-?} lub \textbf{--help}. Wiele programów wyświetla wtedy bardzo ogólną informację o dostępnych przełącznikach, ich działaniu i sposobie wywołania programu. Czasem jednak potrzebujemy bardziej rozbudowanej dokumentacji - wtedy warto spróbować skorzystać z polecenia \texttt{man}(od angielskiego słowa \textbf{man}ual).
@@ -104,7 +230,12 @@ W przypadku gdy chcemy dowiedzieć się jak działa polecenie, lub sprawdzić sp
 %TODO add switches
 \subsection{info}
 \subsection{apropos}
-W przypadku gdy chcemy coś zrobić, ale nie wiemy jakiego polecenia użyć, możemy skorzystać z polecenia \texttt{apropos}. Jako argument wywołania podajemy wówczas frazę jakiej poszukujemy w instrukcji, a \texttt{apropos} przeszuka wszystkie dostępne na dysku instrukcje pod kątem tejże frazy. Przykładowo, jeżeli chcielibyśmy dowiedzieć się jakie polecenie odpowiada za tworzenie katalogu  użyjemy nowopoznanej komendy z argumentem \textit{tworzy katalog}:
+W przypadku gdy chcemy coś zrobić, ale nie wiemy jakiego polecenia użyć, możemy skorzystać z polecenia \texttt{apropos}. Jako argument wywołania podajemy wówczas frazę jakiej poszukujemy w instrukcji, a \texttt{apropos} przeszuka wszystkie dostępne na dysku instrukcje pod kątem tejże frazy. Przykładowo, jeżeli chcielibyśmy dowiedzieć się jakie polecenie odpowiada za tworzenie katalogu  użyjemy nowo poznanej komendy z argumentem \textit{tworzy katalog}:
 \newline
 %TODO add this
+
+\clearpage
+\addcontentsline{toc}{chapter}{Skorowidz}
+\printindex
+
 \end{document}
