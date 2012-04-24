@@ -1,0 +1,45 @@
+\documentclass[10 pt, a4paper, draft]{report}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{draftwatermark}
+\usepackage{makeidx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{textcomp}
+\usepackage{common/czaja_style}
+
+\author{Bartłomiej Sacharski \\ Piotr Sowa \\ Krzysztof Czajkowski \\ Marek Mazur \\}
+\newcommand{\doctitle}{WIZUT Bash Guide} %Prints title
+\title{\doctitle}
+\makeindex
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+%chap1
+\include{ChA_1/chap1}
+
+%chap2
+%\include{ChA_2/chap2}
+%chap3
+%\include{ChA_3/chap3}
+%chap4
+%\include{ChA_4/chap4}
+%chap5
+%\include{ChA_5/chap5}
+%chap6
+%\include{ChA_6/chap6}
+%chap7
+%\include{ChA_7/chap7}
+
+%appendix and stuff
+
+\clearpage
+\addcontentsline{toc}{chapter}{Skorowidz}
+\printindex
+
+\end{document}
