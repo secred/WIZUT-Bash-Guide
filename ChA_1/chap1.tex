@@ -1,30 +1,52 @@
 \chapter{Podstawy operowania wierszem poleceń}
 Drogi Czytelniku! \newline
 Witamy w pierwszym rozdziale krótkiego skryptu \doctitle.
-W tej sekcji spróbujemy zapoznać Cię z podstawami obsługi wiersza poleceń systemów z rodziny Linuks. Oczywiście, rozumiemy Twoje zdziwienie - jak w czasach monitorów Full HD i interfejsów dotykowych, można korzystać jeszcze z czegoś tak przestarzałego jak wiersz poleceń. Nic bardziej mylnego - tryb tekstowy ma się bardzo dobrze i jest używany przez miliony osób na całym świecie. Gwarantujemy że po zapoznaniu się z całą książką sam stwierdzisz że niektóre operacje szybciej jest "wystukać" niż "wyklikać".
+W tej sekcji spróbujemy zapoznać Cię z podstawami obsługi wiersza poleceń systemów z rodziny Linuks. Oczywiście, rozumiemy Twoje zdziwienie - jak w czasach monitorów Full HD i interfejsów dotykowych, można korzystać jeszcze z czegoś wydaje się tak przestarzałego jak wiersz poleceń. Nic bardziej mylnego - tryb tekstowy ma się bardzo dobrze i jest używany przez miliony osób na całym świecie. Gwarantujemy, że po zapoznaniu się z całą książką sam stwierdzisz, iż niektóre operacje szybciej jest "wystukać" niż "wyklikać".
 
 \section{Pierwsze spotkanie z konsolą}
-Podczas swojej nauki będziesz korzystał z tzw. emulatora terminala\index{terminal} - w dawnych czasach było to urządzenie pozwalające na pracę z komputerem, często była to klawiatura służąca do wprowadzania informacji oraz monitor lub drukarka do wyprowadzania danych. Wraz z postępem technologicznym terminale zostały zastąpione wirtualnymi odpowiednikami - właśnie takim wirtualnym terminalem będziemy się posługiwać. Bardzo możliwe że będziesz korzystać z PuTTY, Konsole lub gnome-terminal. Jeśli jednak Twój program nazywa się inaczej to nie przejmuj się - nie ma to w tym przypadku większego znaczenia.
+Podczas swojej nauki będziesz korzystał z tzw. emulatora terminala\index{terminal} - w dawnych czasach było to urządzenie pozwalające na pracę z komputerem, często była to klawiatura służąca do wprowadzania informacji oraz monitor lub drukarka do wyprowadzania danych. Wraz z postępem technologicznym terminale zostały zastąpione wirtualnymi odpowiednikami - właśnie takim wirtualnym terminalem będziemy się posługiwać. Bardzo możliwe, że będziesz korzystać z PuTTY, Konsole lub gnome-terminal. Jeśli jednak Twój program nazywa się inaczej to nie przejmuj się - nie ma to w tym przypadku większego znaczenia.
+
+Jeśli zechcesz uruchomić system z rodziny Linuks na swoim własnym komputerze możesz skorzystać z tak zwanych \textit{live cd}\index{live cd}, które pozwalają na przetestowanie systemu z poziomu płyty cd lub dvd\footnote{Spora część płyt live pozwala także na uruchamianie z poziomu pamięci podłączanej do portu USB. Jeżeli jesteś zainteresowany takim sposobem uruchamiania, to zapoznaj się z projektem \textit{UNetbootin}} bez potrzeby jego instalacji na dysku twardym. Jeżeli uznasz, że praca z systemem jest dla Ciebie przyjemna, to możesz skorzystać z opcji instalacji obok istniejącego systemu operacyjnego - podczas uruchamiania komputera, zyskasz możliwość wyboru jaki system chcesz uruchomić. Jeżeli jesteś zainteresowany przetestowaniem Linuksa na swoim komputerze poszukaj w wyszukiwarce internetowej hasła \textit{live cd linux}.
 
 \subsection{Tuż po uruchomieniu}
 Ze sporą dozą prawdopodobieństwa można założyć, że na ekranie zostanie wyświetlony tekst wyglądający mniej-więcej tak:
 \begin{verbatim}
 [beton@xps ~]$ 
 \end{verbatim}
-W tym krótkim tekście zawartych jest sporo informacji - pracujemy obecnie jako użytkownik \textit{beton} na maszynie zwanej \textit{xps} i katalogiem w którym obecnie się znajdujemy jest katalog domowy (oznaczany często znakiem \textasciitilde). Kolejnym znakiem który informuje nas o stanie terminala jest znak \$ (\index{znak zachęty}nazywany znakiem zachęty). Pojawienie się tego znaku oznacza że terminal nie wykonuje w tym momencie żadnej operacji i można wprowadzić nowe polecenie. Co ciekawe, jeżeli zdarzy się Wam pracować na koncie z uprawnieniami administratora systemu \index{root}(konto root) zauważycie pewnie że zamiast znaku zachęty \$ pojawi się znak \# - takie rozróżnienie jest często wykorzystywane w instrukcjach opisujących wykonanie czegoś za pomocą wiersza poleceń; polecenia wykonywane za pomocą konta administratora będą się zaczynały właśnie od tego znaku.
+W tym krótkim tekście zawartych jest sporo informacji - pracujemy obecnie jako użytkownik \textit{beton} na maszynie zwanej \textit{xps} i katalogiem w którym obecnie się znajdujemy jest katalog domowy (oznaczany często znakiem \textasciitilde). Kolejnym znakiem który informuje nas o stanie terminala jest znak \$ (\index{znak zachęty}nazywany znakiem zachęty). Pojawienie się tego znaku oznacza, że terminal nie wykonuje w tym momencie żadnej operacji i można wprowadzić nowe polecenie. Co ciekawe, jeżeli zdarzy się Wam pracować na koncie z uprawnieniami administratora systemu \index{root}(konto root) zauważycie pewnie, że zamiast znaku zachęty \$ pojawi się znak \# - takie rozróżnienie jest często wykorzystywane w instrukcjach opisujących wykonanie czegoś za pomocą wiersza poleceń; polecenia wykonywane za pomocą konta administratora będą się zaczynały właśnie od tego znaku.
+
+\subsection{Wywoływanie poleceń}
+Wywoływanie wielu różnych poleceń odbywa się w dosyć szablonowy sposób:
+\begin{verbatim}
+komenda [-przełączniki/parametry] [argumenty]
+\end{verbatim}
+Po nazwie komendy możemy podać \texttt{przełączniki}, zmieniające sposób działania programu, a także \texttt{argumenty}, przekazujące do polecenia zestaw danych na których będzie ono wykonywane. Spora część programów dysponuje podwójnymi przełącznikami - jednoliterowymi, poprzedzonymi znakiem myślnika (np. \textbf{-a}) i wieloliterowymi, poprzedzonymi dwoma znakami myślnika (np. \textbf{--all}). Niektóre przełączniki można nawet łączyć ze sobą, pisząc je jeden po drugim (np. \textbf{-la}). Niestety nie wszystkie programy trzymają się tej konwencji, dlatego jeśli nie jesteś pewien poprawnego wywołania polecenia, skorzystaj z pomocy, która bardzo często jest zainstalowana na dysku twardym.
+
+\subsection{Uzyskiwanie pomocy}
+W skrypcie zamieściliśmy tylko częściowy opis poleceń - bardziej szczegółowe informacje możesz odnaleźć samodzielnie korzystając z komend opisanych poniżej.
+
+\subsubsection{man}
+W przypadku gdy chcemy dowiedzieć się jak działa polecenie, lub sprawdzić sposób jego wywołania możemy spróbować wywołać polecenie z przełącznikiem \textbf{-?} lub \textbf{--help}. Wiele programów wyświetla wtedy bardzo ogólną informację o dostępnych przełącznikach, ich działaniu i sposobie wywołania programu. Czasem jednak potrzebujemy bardziej rozbudowanej dokumentacji - wtedy warto spróbować skorzystać z polecenia \texttt{man}(\textit{ang.} \textbf{man}ual).
+
+\subsubsection{info}
+
+\subsubsection{apropos}
+W przypadku gdy chcemy coś zrobić, ale nie wiemy jakiego polecenia użyć, możemy skorzystać z polecenia \texttt{apropos}. Jako argument wywołania podajemy wówczas frazę jakiej poszukujemy w instrukcji, a \texttt{apropos} przeszuka wszystkie dostępne na dysku instrukcje pod kątem tejże frazy. Przykładowo, jeżeli chcielibyśmy dowiedzieć się jakie polecenie odpowiada za tworzenie katalogu  użyjemy nowo poznanej komendy z argumentem \textit{tworzy katalog}:
+\newline
+%TODO add this
 
 \subsection{Uprawnienia do plików}
 Zanim zaczniemy przeglądać zawartość dysku twardego, powinniśmy Ci wcześniej wytłumaczyć czym są uprawnienia dostępu\index{uprawnienia dostępu} do plików i wyjaśnić dlaczego są one tak istotne podczas codziennej pracy.
 \newline
 \newline
-W systemach z rodziny Linux każdy plik czy też katalog, posiada domyślnie zestaw trzech wartości informujących o prawach dostępu do niego - informują one o tym, czy możesz przeglądać zawartość pliku/katalogu, zapisywać do niego zmiany czy też wykonywać plik/przeglądać katalog. Aby mechanizm działał sensownie jego twórcy zdecydowali że należy definiować uprawnienia dla trzech przypadków:
+W systemach z rodziny Linuks każdy plik czy też katalog, posiada domyślnie zestaw trzech wartości informujących o prawach dostępu do niego - informują one o tym, czy możesz przeglądać zawartość pliku/katalogu, zapisywać do niego zmiany czy też wykonywać plik/przeglądać katalog. Aby mechanizm działał sensownie jego twórcy zdecydowali, że należy definiować uprawnienia dla trzech przypadków:
 \begin{itemize}
 \item uprawnienia dla właściciela (najczęściej jest to jego twórca),
 \item uprawnienia dla grupy (uprawnienia dla pewnej grupy użytkowników),
 \item uprawnienia dla innych (dla użytkowników którzy nie pasują do dwóch poprzednich kategorii).
 \end{itemize}
 Każdy z przypadków może przyjąć pewien zestaw wartości oznaczający konkretne uprawnienia:
-\begin{table}[h]
+\begin{table}[h!t]
 \begin{center}
 \begin{tabular}{|c|c|c|} \hline
 Zapis literowy & Zapis cyfrowy & Opis \\ \hline
@@ -36,6 +58,7 @@ Zapis literowy & Zapis cyfrowy & Opis \\ \hline
 \label{tab:uprawnienia}
 \end{center}
 \end{table}
+\newline
 Aby zapewnić różne uprawnienia np. odczyt i zapis sumujemy ich wartości liczbowe, co daje nam wartość 6. Oczywiście, oprócz zapisu liczbowego możemy również stosować bardziej intuicyjny zapis znakowy, np "\texttt{rw}". Chcąc sprawdzić jakie uprawnienia posiada plik możemy skorzystać z polecenia \texttt{ls} z przełącznikiem \textbf{-l} (więcej o poleceniu możesz przeczytać na stronie \pageref{sec:ls}). Abyś lepiej zrozumiał jak odczytywać uprawnienia przypisane plikowi posłużymy się plikiem \textit{fstab} znajdującym się w katalogu \textit{/etc}:
 \begin{verbatim}
 -rw-rw-r--.  1 root root      501 03-01 23:40 fstab
@@ -44,14 +67,14 @@ W powyższym przykładzie właściciel pliku posiada zarówno uprawnienia odczyt
 \begin{verbatim}
 drwxr-xr-x.   2 beton root  4096 03-29 10:38 virtual
 \end{verbatim}
-Jak pewnie się już domyśliłeś, właściciel katalogu posiada do niego pełne uprawnienia - odczyt, zapis i możliwość przeglądania katalogu - w przypadku grupy oraz innych użytkowników możliwe jest jedynie odczytywanie i przeglądanie zawartości katalogu. Właścicielem jest tutaj użytkownik \textit{beton}, ale grupa do której uprawnienia są zdefiniowane to \textit{root}. Możliwe że zastanawiasz się teraz co oznacza litera \texttt{d} widniejąca przed uprawnieniami - jest to oznaczanie że dany element jest katalogiem (w przypadku pliku \textit{fstab} zamiast litery \texttt{d} stał znak \texttt{-}).
+Jak pewnie się już domyśliłeś, właściciel katalogu posiada do niego pełne uprawnienia - odczyt, zapis i możliwość przeglądania katalogu - w przypadku grupy oraz innych użytkowników możliwe jest jedynie odczytywanie i przeglądanie zawartości katalogu. Właścicielem jest tutaj użytkownik \textit{beton}, ale grupa do której uprawnienia są zdefiniowane to \textit{root}. Możliwe, że zastanawiasz się teraz co oznacza litera \texttt{d} widniejąca przed uprawnieniami - jest to oznaczanie, że dany element jest katalogiem (w przypadku pliku \textit{fstab} zamiast litery \texttt{d} stał znak \texttt{-}).
 \newline
 \newline
-Bardzo ważne jest pamiętanie o definiowanie właściwych uprawnień pliku, jeśli przyznamy zbyt duże uprawnienia to może się okazać że inni użytkownicy przeglądają nasze katalogi lub nawet zmieniają zawartość plików. Z drugiej strony należy też uważać aby nie ustawić zbyt restrykcyjnych uprawnień lub ich nawet nie odebrać, bo może to się skończyć błędnym działaniem systemu lub zainstalowanych programów.
+Bardzo ważne jest pamiętanie o definiowanie właściwych uprawnień pliku, jeśli przyznamy zbyt duże uprawnienia to może się okazać, że inni użytkownicy przeglądają nasze katalogi lub nawet zmieniają zawartość plików. Z drugiej strony należy też uważać aby nie ustawić zbyt restrykcyjnych uprawnień lub ich nawet nie odebrać, bo może to się skończyć błędnym działaniem systemu lub zainstalowanych programów.
 
 \subsection{chmod}
 \label{sec:chmod}
-Skoro wytłumaczyliśmy Ci już czym są uprawnienia, najwyższy czas by pokazać Ci jak przyznawać, zmieniać i odbierać uprawnienia do plików i katalogów. Poleceniem które nam to umożliwi jest \texttt{chmod} (\textit{ang.}\textbf{ch}ange file \textbf{mod}es or Access Control Lists). Typowe wywołanie polecenia \texttt{chmod} zawiera \textit{przełącznik} \textit{uprawnienia} \textit{pliki} których prawa chcemy zmienić. Chcąc natychmiast zmienić uprawnienia właściciela, grupy i innych możemy posłużyć się zapisem liczbowym - przykładowo, chcąc nadać pełnie praw do pliku \textit{koza} właścicielowi, a grupie i innym odebrać wszystkie prawa wykonamy następujące polecenie:
+Skoro wytłumaczyliśmy Ci już czym są uprawnienia, najwyższy czas by pokazać Ci jak przyznawać, zmieniać i odbierać uprawnienia do plików i katalogów. Poleceniem które nam to umożliwi jest \texttt{chmod} (\textit{ang.} \textbf{ch}ange file \textbf{mod}es or Access Control Lists). Typowe wywołanie polecenia \texttt{chmod} zawiera \textit{przełącznik} \textit{uprawnienia} \textit{pliki} których prawa chcemy zmienić. Chcąc natychmiast zmienić uprawnienia właściciela, grupy i innych możemy posłużyć się zapisem liczbowym - przykładowo, chcąc nadać pełnie praw do pliku \textit{koza} właścicielowi, a grupie i innym odebrać wszystkie prawa wykonamy następujące polecenie:
 \begin{verbatim}
 [beton@xps ~]$ chmod 700 koza
 \end{verbatim}
@@ -60,9 +83,47 @@ Wynik działania polecenia możemy sprawdzić za pomocą wspomnianego już wcze�
 [beton@xps ~]$ ls -l | grep koza
 -rwx------.  1 beton beton      0 04-24 18:09 koza
 \end{verbatim}
-Jeżeli chcielibyśmy po prostu dodać lub usunąć konkretne prawo to z pomocą przychodzi zapis znakowy uprawnień. 
+Jeżeli chcielibyśmy po prostu dodać lub usunąć konkretne prawo to z pomocą przychodzi zapis znakowy uprawnień. Symbole jakie możemy przekazywać do polecenia zamieszczono w tabelach poniżej.
+\begin{table}[h!t!b]
+\begin{center}
+\begin{tabular}{|c|c|} \hline
+Symbol & Opis \\ \hline
+\texttt{u} & uprawnienia właściciela \\ \hline
+\texttt{g} & uprawnienia grupy \\ \hline
+\texttt{o} & uprawnienia innych \\ \hline
+\texttt{a} & uprawnienia wszystkich \\ \hline
+\end{tabular}
+\caption{Symbole właścicieli praw akceptowane przez \texttt{chmod}}
+\label{tab:chmod_symbole_wlasciciele}
+\end{center}
+\end{table}
+
+\begin{table}[h!t!b]
+\begin{center}
+\begin{tabular}{|c|c|} \hline
+Symbol & Opis \\ \hline
+\texttt{+} & dodanie do istniejących uprawnień \\ \hline
+\texttt{-} & odebranie z istniejących uprawnień \\ \hline
+\texttt{=} & zamiana istniejących uprawnień \\ \hline
+\end{tabular}
+\caption{Symbole operatorów akceptowane przez \texttt{chmod}}
+\label{tab:chmod_symbole_operatory}
+\end{center}
+\end{table}
+
+%TODO Should fix table positions
+\FloatBarrier
+
+Uprawnienia określamy za pomocą znaków, tak jak jest to przedstawione w tabeli na stronie \pageref{tab:uprawnienia}. Dla lepszego zrozumienia posłużymy się przykładem - dodamy teraz uprawnienia czytania pliku \textit{koza} pozostałym użytkownikom.
+\begin{verbatim}
+[beton@xps ~]$ chmod o+r koza 
+[beton@xps ~]$ ls -l | grep koza
+-rwx-----x.  1 beton beton      0 04-24 18:09 koza
+\end{verbatim}
+Przeanalizujmy szybko powyższe polecenie - wywołaliśmy \texttt{chmod} wskazując że zmieniamy uprawnienia pozostałych użytkowników (\texttt{o}), dodając do istniejących (\texttt{+}) prawo odczytu (\texttt{r}). Niewątpliwie zapis znakowy jest bardziej czytelny niż zapis numeryczny, tym niemniej zalecamy zapamiętanie obu form, gdyż każda z nich przyda się Ci w przyszłości.
 
 \subsection{chown}
+Możliwe że zastanawiasz się teraz co zrobić w sytuacji gdy chciałbyś zmienić grupę której przypisujesz uprawnienia do pliku, lub też chciałbyś zmienić właściciela pliku. Tę funkcjonalność dostarcza nam polecenie \texttt{chown} (\textit{ang.} \textbf{ch}ange file \textbf{own}er and group).
 
 \section{Poruszanie się w systemie plików}
 \subsection{pwd}
@@ -71,7 +132,7 @@ Jak już wspomniałem większość terminali jest skonfigurowana w taki sposób 
 [beton@xps ~]$ pwd
 /home/beton
 \end{verbatim} 
-Jak widać na przykładzie, po zastosowaniu polecenia, dowiadujemy się że pracujemy w katalogu domowym użytkownika \textit{beton} - potwierdza to także znak \textasciitilde przed znakiem zachęty \$.
+Jak widać na przykładzie, po zastosowaniu polecenia, dowiadujemy się, że pracujemy w katalogu domowym użytkownika \textit{beton} - potwierdza to także znak \textasciitilde przed znakiem zachęty \$.
 
 \subsection{cd}
 Jedną z najczęściej wykonywanych w terminalu akcji będzie prawdopodobnie zmiana katalogu w którym obecnie pracuje użytkownik. Do tego celu służy prosta komenda \texttt{cd} (\textit{ang.} \textbf{c}hange \textbf{d}irectory). W przykładzie podanym poniżej zademonstrujemy jak przenieść się z obecnego katalogu, do katalogu \textit{/} (katalogu głównego):
@@ -81,11 +142,47 @@ Jedną z najczęściej wykonywanych w terminalu akcji będzie prawdopodobnie zmi
 /
 [beton@xps /]$ 
 \end{verbatim}
-%TODO possibly add cd switches
+Możemy także przenieść się do katalogu, który znajduje się w miejscu w którym jesteśmy obecnie - załóżmy, że jesteśmy w katalogu domowym, a chcemy się przenieść do katalogu \textit{Dokumenty}:
+\begin{verbatim}
+[beton@xps ~]$ cd Dokumenty/
+[beton@xps Dokumenty]$ pwd
+/home/beton/Dokumenty
+[beton@xps Dokumenty]$
+\end{verbatim}
+
+\subsubsection{Etykiety \texttt{.} i \texttt{..}}
+Czasem może się zdarzyć, że będziemy chcieli wskazać na katalog w którym obecnie się znajdujemy (zauważymy to zwłaszcza podczas uruchamiania plików wykonywalnych). Taką etykietą jest znak \texttt{.} (znak kropki) - możemy ją zastosować np. w połączeniu z poleceniem \texttt{cd} (posłużymy się tutaj tym samym katalogiem, co w poprzednim przypadku):
+\begin{verbatim}
+[beton@xps ~]$ pwd
+/home/beton
+[beton@xps ~]$ cd ./Dokumenty/
+[beton@xps Dokumenty]$ pwd
+/home/beton/Dokumenty
+[beton@xps Dokumenty]$ 
+\end{verbatim}
+Inną etykietą o podobnym działaniu jest \texttt{..} - wskazuje ona na katalog znajdujący się wyżej w hierarchii wobec katalogu w którym obecnie się znajdujemy. Aby łatwiej zrozumieć sens istnienia takiej etykiety zademonstrujemy dwa przykłady - bez i z zastosowaniem \texttt{..}:
+\begin{verbatim}
+[beton@xps ~] pwd
+/home/beton
+[beton@xps ~] cd /home
+[beton@xps ~] pwd
+/home
+\end{verbatim}
+\begin{verbatim}
+[beton@xps ~] pwd
+/home/beton
+[beton@xps ~] cd ..
+[beton@xps ~] pwd
+/home
+\end{verbatim}
+Przykład pierwszy pokazuje przejście do katalogu wyżej poprzez podanie bezwzględnej ścieżki do tegoż katalogu. Chociaż w przykładzie nie jest to skomplikowana ścieżka, dla innych katalogów może być to seria katalogów w katalogach; przepisywanie całości może okazać się męczące i nieefektywne. Dodatkowo podejście takie utrudnia pisanie skryptów.
+\newline
+\newline
+Przykład drugi używa jako ścieżkę do katalogu wyżej etykiety \texttt{..} - dzięki niej nie musimy znać pełnej ścieżki do katalogu. Dodatkowo znacznie łatwiej zastosować ją w naszych skryptach.
 
 \subsection{ls}
 \label{sec:ls}
-Przydatnym poleceniem do wyświetlania zawartości katalogu jest polecenie \texttt{ls} (\textit{ang.} \textbf{l}i\textbf{s}t directory contents). W przypadku wywołania \texttt{ls} bez żadnego dodatkowego argumentu ani przełącznika będzie skutkowało wyświetleniem zawartości obecnego katalogu w prostej formie, której przykład można zobaczyć poniżej:
+Przydatnym poleceniem do wyświetlania zawartości katalogu jest polecenie \texttt{ls} (\textit{ang.} \textbf{l}i\textbf{s}t directory contents). W przypadku wywołania \texttt{ls} bez żadnego dodatkowego argumentu ani przełącznika będzie skutkowało wyświetleniem zawartości obecnego katalogu w formie, której przykład można zobaczyć poniżej:
 \begin{verbatim}
 [beton@xps ~]$ ls
 Dokumenty  Obrazy   Programy   Pulpit    Wideo
@@ -119,37 +216,11 @@ Kolejnym przełącznikiem jaki wyróżnimy poprzez pokazanie Ci jego działania,
 .bash_logout         .icons                     .ssh
 .bash_profile        .imsettings.log            streching.png
 \end{verbatim}
-\subsubsection*{Przełączniki}
+\subsubsection*{Przykładowe przełączniki}
 \begin{description}
 \item \textbf{-a} lub \textbf{--all} wyłącza ukrywania katalogów zaczynających się od .
 \item \textbf{-l} użycie długiego formatu wyjściowego wyświetlającego wynik w formie listy
 \end{description}
-
-\subsection{. i ..}
-Wprawne oko zauważy pewnie dwa elementy w poprzednim listingu które nie były dotychczas wytłumaczone - \texttt{.} i \texttt{..} - czasem zdarzy się że będziemy chcieli wskazać na katalog w którym obecnie się znajdujemy (zauważymy to zwłaszcza podczas uruchamiania plików wykonywalnych). Taką etykietą jest znak \texttt{.} (znak kropki).
-%TODO add more about .
-\newline
-\newline
-Etykieta \texttt{..} wskazuje na katalog znajdujący się wyżej w hierarchii wobec katalogu w którym obecnie się znajdujemy. Aby łatwiej zrozumieć sens istnienia takiej etykiety zademonstrujemy dwa przykłady - bez i z zastosowaniem \texttt{..}:
-\newline
-\begin{verbatim}
-[beton@xps ~] pwd
-/home/beton
-[beton@xps ~] cd /home
-[beton@xps ~] pwd
-/home
-\end{verbatim}
-\begin{verbatim}
-[beton@xps ~] pwd
-/home/beton
-[beton@xps ~] cd ..
-[beton@xps ~] pwd
-/home
-\end{verbatim}
-Przykład pierwszy pokazuje przejście do katalogu wyżej poprzez podanie bezwzględnej ścieżki do tegoż katalogu. Chociaż w przykładzie nie jest to skomplikowana ścieżka, dla innych katalogów może być to seria katalogów w katalogach; przepisywanie całości może okazać się męczące i nieefektywne. Dodatkowo podejście takie utrudnia pisanie skryptów.
-\newline
-\newline
-Przykład drugi używa jako ścieżkę do katalogu wyżej etykiety \texttt{..} - dzięki niej nie musimy znać pełnej ścieżki do katalogu. Dodatkowo znacznie łatwiej zastosować ją w naszych skryptach.
 
 \subsection{uruchamianie skryptów i plików wykonywalnych}
 Uruchamianie programów może się odbywać na kilka sposobów, z jednego z nich korzystaliśmy nawet kilka razy podczas opisywania poleceń powyżej. Jeżeli katalog w którym znajduje się nasz program jest dopisany do zmiennej środowiskowej \texttt{PATH} (co to jest zmienna środowiskowa wyjaśnimy Ci później), to wystarczy podać nazwę pliku, a program się wykona. Dokładnie w taki sposób wywoływaliśmy polecenie \texttt{pwd}. Dla zademonstrowania działania zmiennej środowiskowej wyświetlę Ci jej przykładową zawartość (o wyświetlaniu tekstu na ekranie konsoli dowiesz się w następnych rozdziałach).
@@ -157,14 +228,14 @@ Uruchamianie programów może się odbywać na kilka sposobów, z jednego z nich
 [beton@xps ~]$ echo $PATH
 /usr/local/bin:/usr/bin:/bin
 \end{verbatim}
-W powyższym przypadku zmienna wskazuje na trzy katalogi: \texttt{/usr/local/bin}, \texttt{/usr/bin} i \texttt{/bin}. Oznacza to że do wszystkich programów umieszczonych wewnątrz nich można się odwołać poprzez podanie nazwy pliku z programem.
+W powyższym przypadku zmienna wskazuje na trzy katalogi: \texttt{/usr/local/bin}, \texttt{/usr/bin} i \texttt{/bin}. Oznacza to, że do wszystkich programów umieszczonych wewnątrz nich można się odwołać poprzez podanie nazwy pliku z programem.
 \newline
 Spróbujmy teraz innego podejścia - programy można uruchamiać również poprzez podanie adresu bezwzględnego\index{adres bezwzględny} do pliku wykonywalnego (oznacza to podanie pełnej ścieżki do pliku, z uwzględnieniem katalogu głównego). Dla przykładu wywołamy tak polecenie \texttt{pwd} (znajduje się ono w \texttt{/bin}).
 \begin{verbatim}
 [beton@xps ~]$ /bin/pwd
 /home/beton
 \end{verbatim}
-Ostatnim podejściem które będziemy stosować jest podawanie adresu względnego\index{adres względny} do pliku (oznacza to że podawać będziemy ścieżkę do pliku względem katalogu w którym pracujemy obecnie). Wywołanie jest bardzo podobne do używania adresu bezwzględnego, jednak ścieżkę do pliku poprzedzamy znakiem kropki. Tak jak w poprzednich dwóch przykładach posłużymy się poleceniem \texttt{pwd} - różnica będzie taka, że program będziemy wywoływać z katalogu w którym znajduje się plik wykonywalny.
+Ostatnim podejściem które będziemy stosować jest podawanie adresu względnego\index{adres względny} do pliku (oznacza to, że podawać będziemy ścieżkę do pliku względem katalogu w którym pracujemy obecnie). Wywołanie jest bardzo podobne do używania adresu bezwzględnego, jednak ścieżkę do pliku poprzedzamy znakiem kropki. Tak jak w poprzednich dwóch przykładach posłużymy się poleceniem \texttt{pwd} - różnica będzie taka, że program będziemy wywoływać z katalogu w którym znajduje się plik wykonywalny.
 \begin{verbatim}
 [beton@xps ~]$ cd /bin
 [beton@xps bin]$ ./pwd 
@@ -174,7 +245,7 @@ Ostatnim podejściem które będziemy stosować jest podawanie adresu względneg
 Istotną rzeczą o której należy pamiętać przy wykonywaniu plików jest posiadanie uprawnień do wykonywania danego programu - jeżeli nie będziemy ich posiadać, to wywołanie zakończy się błędem (o uprawnieniach możesz przeczytać w rozdziale ...) %TODO add reference to the section containing file rights.
 \newline
 \newline
-Wywoływanie skryptów Basha odbywa się podobnie - możemy próbować uruchomić go tak jak plik wykonywalny, jednak powiedzie się to tylko jeśli będziemy posiadali do tego prawa. Jeśli jednak okaże się że tak nie jest, możesz spróbować innego wywołania. Podając przed nazwą skryptu, nazwę interpretera który ma wykonać nasz kod możemy uruchomić program bez większych problemów. Przykładowo interpreterem z którego będziemy korzystać będzie interpreter \texttt{bash}. Załóżmy że posiadamy skrypt o nazwie \textit{Hello.sh} (program będzie jedynie wyświetlał na ekranie tekst 
+Wywoływanie skryptów Basha odbywa się podobnie - możemy próbować uruchomić go tak jak plik wykonywalny, jednak powiedzie się to tylko jeśli będziemy posiadali do tego prawa. Jeśli jednak okaże się, że tak nie jest, możesz spróbować innego wywołania. Podając przed nazwą skryptu, nazwę interpretera który ma wykonać nasz kod możemy uruchomić program bez większych problemów. Przykładowo interpreterem z którego będziemy korzystać będzie interpreter \texttt{bash}. Załóżmy, że posiadamy skrypt o nazwie \textit{Hello.sh} (program będzie jedynie wyświetlał na ekranie tekst 
 "\textit{Hello world!}") i chcemy go uruchomić w poznany przed chwilą sposób.
 \begin{verbatim}
 [beton@xps tmp]$ bash Hello.sh 
@@ -186,7 +257,9 @@ Wsród uprawnień jakie były przypisane do pliku nie było praw wykonywania, co
 \end{verbatim}
 Jaki zatem nasuwa się wniosek? Jeżeli chcemy uruchomić plik wykonywalny, to musimy posiadać prawa wykonywania. Przewagą skryptu jest to, że wykonywalny musi być jedynie interpreter, do skryptu musimy mieć jedynie prawa odczytu. Przydatne, nieprawdaż?
 
-\section{Proste operacje na plikach i katalogach}
+\section{Wybrane operacje na plikach i katalogach}
+W poniższej sekcji zawarliśmy wybrane polecenia służące do operacji na plikach i katalogach. Wraz z krótkim opisem i przykładowym wywołaniem podaliśmy przełączniki, które uznaliśmy za przydatne podczas nauki. Jeżeli chcesz wiedzieć o poleceniu więcej, skorzystaj z dostarczonej wraz z systemem pomocy.
+
 \subsection{touch}
 Jednym ze sposobów na utworzenie pustego pliku z poziomu wiersza poleceń jest użycie komendy \texttt{touch} (jest to właściwie efekt uboczny działania tego polecenia, ale mimo to bardzo przydatny). Przykład utworzenia pliku \textit{koza} będzie wyglądał następująco:
 \begin{verbatim}
@@ -202,7 +275,7 @@ Jeżeli chcemy utworzyć na raz kilka plików możemy je utworzyć jednym polece
 \begin{verbatim}
 [beton@xps ~]$ touch plik1 plik2 plik3
 \end{verbatim}
-\subsubsection*{Przełączniki}
+\subsubsection*{Przykładowe przełączniki}
 %TODO Add more info about modyfing timestamps
 
 \subsection{mv}
@@ -214,12 +287,12 @@ Podobnie wygląda przenoszenie plików - aby przenieść plik \textit{koza} znaj
 \begin{verbatim}
 [beton@xps ~]$ mv łąka/koza zagroda/
 \end{verbatim}
-Jak już wcześniej wspomniałem, \texttt{mv} jest wywoływany z co najmniej dwoma parametrami - oznacza to że możemy określić wiele plików lub katalogów które chcemy przenieść (miejsce docelowe może być jednak tylko jedno).
+Jak już wcześniej wspomniałem, \texttt{mv} jest wywoływany z co najmniej dwoma parametrami - oznacza to, że możemy określić wiele plików lub katalogów które chcemy przenieść (miejsce docelowe może być jednak tylko jedno).
 \begin{verbatim}
 [beton@xps ~]$ mv plik1 plik2 plik3 katalog_na_pliki/
 \end{verbatim}
 %TODO write about mv
-\subsubsection*{Przełączniki}
+\subsubsection*{Przykładowe przełączniki}
 %TODO add switches
 
 \subsection{cp}
@@ -236,11 +309,11 @@ Co by się stało gdybyśmy spróbowali skopiować te same pliki do innego pliku
 cp: cel `p5' nie jest katalogiem
 [beton@xps tmp]$ 
 \end{verbatim}
-\subsubsection*{Przełączniki}
+\subsubsection*{Przykładowe przełączniki}
 
 \subsection{rm}
 Do skasowania plików używamy polecenia \texttt{rm}(\textit{ang.} \textbf{r}e\textbf{m}ove)
-\subsubsection*{Przełączniki}
+\subsubsection*{Przykładowe przełączniki}
 %TODO add switches
 
 \subsection{mkdir}
@@ -260,7 +333,7 @@ to bez zastosowania dodatkowego przełącznika \textbf{-p} konsola zwróci błą
 \begin{verbatim}
 mkdir: nie można utworzyć katalogu `łąkaa/koza': Nie ma takiego pliku ani katalogu
 \end{verbatim}
-\subsubsection*{Przełączniki}
+\subsubsection*{Przykładowe przełączniki}
 %TODO add switches
 
 \subsection{rmdir}
@@ -270,7 +343,7 @@ Jak łatwo się domyślić - jeżeli istnieje polecenie \texttt{mkdir}, służą
 \end{verbatim}
 Pozostałe operacje jak kasowanie katalogu wewnątrz innego katalogu oraz usuwanie całej hierarchii katalogów jest analogiczne do operowania poleceniem \texttt{mkdir}.
 \newline
-\subsubsection*{Przełączniki}
+\subsubsection*{Przykładowe przełączniki}
 \begin{description}
 \item \textbf{-p} lub \textbf{--parents} usuwa katalog wraz z jego katalogami nadrzędnymi
 %TODO add more switches
@@ -281,14 +354,3 @@ Pozostałe operacje jak kasowanie katalogu wewnątrz innego katalogu oraz usuwan
 Do prostej edycji plików z poziomu wiersza poleceń możesz skorzystać z programu \texttt{nano} (który jest rozbudowanym klonem edytora \texttt{pico}).
 \subsection{Vi i Vim}
 Edytorami które oferując znacznie więcej możliwości (ale są zarazem znacznie bardziej skomplikowane) są \texttt{vi} i \texttt{vim} (\textit{ang.} \textbf{V}i \textbf{IM}proved).
-
-\section{Uzyskiwanie pomocy}
-\subsection{man}
-W przypadku gdy chcemy dowiedzieć się jak działa polecenie, lub sprawdzić sposób jego wywołania możemy spróbować wywołać polecenie z przełącznikiem \textbf{-?} lub \textbf{--help}. Wiele programów wyświetla wtedy bardzo ogólną informację o dostępnych przełącznikach, ich działaniu i sposobie wywołania programu. Czasem jednak potrzebujemy bardziej rozbudowanej dokumentacji - wtedy warto spróbować skorzystać z polecenia \texttt{man}(\textit{ang.} \textbf{man}ual).
-\subsubsection*{Przełączniki}
-%TODO add switches
-\subsection{info}
-\subsection{apropos}
-W przypadku gdy chcemy coś zrobić, ale nie wiemy jakiego polecenia użyć, możemy skorzystać z polecenia \texttt{apropos}. Jako argument wywołania podajemy wówczas frazę jakiej poszukujemy w instrukcji, a \texttt{apropos} przeszuka wszystkie dostępne na dysku instrukcje pod kątem tejże frazy. Przykładowo, jeżeli chcielibyśmy dowiedzieć się jakie polecenie odpowiada za tworzenie katalogu  użyjemy nowo poznanej komendy z argumentem \textit{tworzy katalog}:
-\newline
-%TODO add this
