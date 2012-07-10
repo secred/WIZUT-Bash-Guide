@@ -3,6 +3,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{verbatim}
 \usepackage{listings}
+\usepackage{enumitem}
 
 \usepackage{color}
 \usepackage{textcomp}
@@ -30,7 +31,8 @@
 }
 %TODO: Configure listing.
 
-\author{Krzysztof Czajkowski}
+\author{Krzysztof Czajkowski\\
+Rafał Mielnik}
 \title{WIZUT Bash Guide - Rozdział III\\
 Wyrażenia warunkowe}
 
@@ -75,8 +77,105 @@ else
 	polecenie3
 fi
 \end{lstlisting}
-\subsection{Nawiasy () i []}
-W instrukcji if możliwe jest użycie nawiasów okrągłych oraz kwadratowych. Czy różnica między nimi jest znacząca? Oczywiście jest i to bardzo.
+
+\subsection{Sprawdzanie warunków}
+%\subsection{Wstęp}
+Sprawdzanie warunków w bashu jest bardzo elastyczne - służy do tego komenda \texttt{test}. Ponieważ występuje ona jako polecenie powłoki, nie powinno się nazywać tak skryptów, ponieważ nie będą działać. Działanie polecenia \texttt{test} jest bardzo proste:\\
+Jeżeli warunek zostanie wykonany polecenie test zwróci wartość 0 (true).\\
+Jeżeli warunek nie zostanie wykonany polecenie test zwróci wartość 1 (false).\\\\
+Sprawdzanie warunków jest bardzo mocno powiązane z instrukcją \texttt{if}. Składnia wygląda następująco:
+%\subsubsection{Składnia}
+\begin{lstlisting}
+test wyrazenie1 operator wyrazenie2
+\end{lstlisting}
+lub
+\begin{lstlisting}
+[ wyrazenie1 operator wyrazenie2 ]
+\end{lstlisting}
+Spoglądając na drugą możliwość od razu widać jak łatwo wykorzystać to przy if`ie:
+\begin{lstlisting}
+if [ wyrazenie1 operator wyrazenie2 ]
+then
+	polecenie
+fi
+\end{lstlisting}
+Wszystko zależy od operatora jakiego użyjemy, liczba operatorów jest spora, poniżej przedstawiona jest część z nich.\\
+Operacje arytmetyczne:
+\begin{itemize}[itemsep=0cm,leftmargin=1cm]
+\item \texttt{a -eq b} równe
+\item \texttt{a -ne b} różne
+\item \texttt{a -le b} mniejsze lub równe
+\item \texttt{a -lt b} mniejsze
+\item \texttt{a -ge b} większe lub równe
+\item \texttt{a -gt b} większe
+\end{itemize}
+Operacje na systemie plików:
+\begin{itemize}[itemsep=0cm,leftmargin=1cm]
+\item \texttt{-e plik} istnieje
+\item \texttt{-d plik} istnieje i jest katalogiem
+\item \texttt{-r plik} istnieje i jest do czytania
+\item \texttt{-w plik} istnieje i jest zapisywalny
+\item \texttt{-x plik} istnieje i jest wykonywalny
+\item \texttt{a -nt b} plik a jest nowszy od b
+\item \texttt{a -ot b} plik a jest starszy od b
+\end{itemize}
+Operacje na łańcuchach znakowych:
+\begin{itemize}[itemsep=0cm,leftmargin=1cm]
+\item \texttt{a = b} równy
+\item \texttt{a != b} różny
+\item \texttt{a < b} pierwszy tekst alfabetycznie przed drugim
+\item \texttt{a > b} pierwszy tekst alfabetycznie za drugim
+\item \texttt{-n a} wyrażenie ma długość większą niż 0
+\end{itemize}
+Pełną listę możliwych operatorów znajdziesz wpisując \texttt{man bash}.\\
+Przykładem użycia sprawdzania warunków może być taki prosty skrypt:
+\lstinputlisting[language=bash]{example_test_if.sh}
+
+\subsection{Nawiasy okrągłe, klamrowe i kwadratowe}
+Często błędny dobór nawiasów powoduje błędy w skrypcie, więc rodzi się pytanie - kiedy których nawiasów używać?\\
+Każde z zapisanych wyrażeń w nawiasach jest nazywane poleceniem złożonym.\\\\
+W instrukcji warunkowej if używamy:\\
+Pojedyńczych kwadratowych nawiasów - sprawdzanie warunków (opisane wyżej).
+\begin{lstlisting}
+#!/bin/bash
+if [ -d ~/.kde ]; then
+    echo "Wygladasz na uzytkownika KDE"
+fi
+\end{lstlisting}
+\begin{lstlisting}
+#!/bin/bash
+f [ 1 -eq 1 ]; then
+    echo "Prawda!" 
+fi
+\end{lstlisting}
+\begin{lstlisting}
+#!/bin/bash
+read a;
+f [ "$a" == "moo" ]; then
+    echo "Mooo!" 
+fi
+\end{lstlisting}
+Podwójnych kwadratowych nawiasów - wyrażenia regularne (tzw wzorców).
+\begin{lstlisting}
+#!/bin/bash
+a="czaja"
+if [[ "$a"=~"^c*a$" ]]; then
+    echo "Rozpoczyna sie na c i konczy na a!"
+fi
+\end{lstlisting}
+Podwójnych okrągłych nawiasów - obliczanie wyrażeń arytmetycznych.
+\begin{lstlisting}
+#!/bin/bash
+num=10
+if (( $num < 0 )); then
+    echo "Mniejsze niz zero!"
+fi 
+\end{lstlisting}
+Istnieją także inne polecenia złożone, które nie są używane jako warunki w if:\\
+\texttt{(lista)} - lista wykonywana jest w podpowłoce. Przypisania zmiennych i  polecenia  wbudowane  wpływające na środowisko powłoki nie zachowują swoich skutków  po  zakończeniu  polecenia. Zwracanym kodem jest kod zakończenia listy.\\
+\texttt{\{ lista; \}} - lista jest po prostu wykonywana w bieżącym środowisku powłoki. Ważna jest składnia z zachowaniem spacji.\\\\
+Jeśli chcesz dowiedzieć się więcej - poszukaj Poleceń złożonych w manualu basha.
+
 \section{case}
 \subsection{Wstęp}
 %TODO: Change this text
@@ -139,4 +238,10 @@ wypadku \texttt{ls -la}) dla tej zmiennej. Za poleceniem \texttt{ls} znajduje si
 Problem przytoczony przy omawianiu instrukcji case, można uprościć dodając instrukcję select. \newline
 \lstinputlisting[language=bash]{example_cs.sh}
 %TODO: Add comment.
+
+\section{Zadanie}
+Napisz skrypt, który będzie prosił użytkownika o podanie liczb w zakresie 1-7, którym mają być przypisane  odpowiednie dni tygodnia. Po wprowadzeniu złej wartości program ma wyświetlić komunikat „nieobsługiwana wartość”. Program należy zrealizować:\\
+	a) wykorzystując tylko instrukcję if,\\
+	b) wykorzystując tylko instrukcję case,\\
+	c) wykorzystując case + select.
 \end{document}
