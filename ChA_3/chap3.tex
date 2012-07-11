@@ -1,46 +1,4 @@
-\documentclass[10 pt, a4paper]{article}
-\usepackage{polski}
-\usepackage[utf8]{inputenc}
-\usepackage{verbatim}
-\usepackage{listings}
-\usepackage{enumitem}
-
-\usepackage{color}
-\usepackage{textcomp}
-\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
-\lstset{
-	%backgroundcolor=\color{lbcolor},
-	tabsize=4,
-	%rulecolor=,
-    %basicstyle=\scriptsize,
-    upquote=true,
-    aboveskip={1.5\baselineskip},
-    columns=fixed,
-    showstringspaces=false,
-    extendedchars=true,
-    breaklines=true,
-    %frame=single,
-    showtabs=false,
-    showspaces=false,
-    showstringspaces=false,
-    identifierstyle=\ttfamily,
-    numbers=left, 
-    numberstyle=\tiny, 
-    stepnumber=1, 
-    numbersep=5pt,
-}
-%TODO: Configure listing.
-
-\author{Krzysztof Czajkowski\\
-Rafał Mielnik}
-\title{WIZUT Bash Guide - Rozdział III\\
-Wyrażenia warunkowe}
-
-\begin{document}
-\maketitle
-\tableofcontents
-\newpage
-
+\chapter{Wyrażenia warunkowe}
 %TODO: Add intro for chapter, add something about if`s.
 \section{Wstęp}
 W tym rozdziale dowiemy się o wyrażeniach warunkowych. Wyrażenia warunkowe jako część języka skryptowego bash, pozwalają na wykonywanie przydzielonych instrukcji w zależności od wyboru użytkownika, aplikacji lub sprawdzenia czy zdefiniowane zapytanie będzie prawdą lub fałszem. Możliwość warunkowego decydowania o wykonywanym kroku jest bardzo istotna, zdecydowania większość algorytmów jej wymaga.
@@ -129,7 +87,7 @@ Operacje na łańcuchach znakowych:
 \end{itemize}
 Pełną listę możliwych operatorów znajdziesz wpisując \texttt{man bash}.\\
 Przykładem użycia sprawdzania warunków może być taki prosty skrypt:
-\lstinputlisting[language=bash]{example_test_if.sh}
+\lstinputlisting[language=bash]{ChA_3/example_test_if.sh}
 
 \subsection{Nawiasy okrągłe, klamrowe i kwadratowe}
 Często błędny dobór nawiasów powoduje błędy w skrypcie, więc rodzi się pytanie - kiedy których nawiasów używać?\\
@@ -188,7 +146,7 @@ lepszym i czytelniejszym rozwiązaniem.
 \subsection{Składnia}
 Składnia case`a wygląda następująco:
 
-\lstinputlisting[language=bash]{syntax_case.sh}
+\lstinputlisting[language=bash]{ChA_3/syntax_case.sh}
 
 Jest ona bardzo prosta do zrozumienia. Pierwsza linijka zaczynająca instrukcję zawiera
 wartość zdefiniowaną przez nas w zmiennej, następnie linijki są wzorcami sprawdzającymi
@@ -200,7 +158,7 @@ wzorców zapisać komendę \texttt{esac}.
 
 \subsection{Przykład} 
 
-\lstinputlisting[language=bash]{example_case.sh}
+\lstinputlisting[language=bash]{ChA_3/example_case.sh}
 
 Proste menu, prosto i czytelnie zapisane. Wpisując liczbę 1, 2 lub 3 trafimy na któryś ze
 wzorców i zostaną wykonane przypisane mu polecenia (jak widać we wzorcu 1 i 2, można
@@ -221,7 +179,7 @@ done
 
 \subsection{Przykład}
 
-\lstinputlisting[language=bash]{example_select.sh}
+\lstinputlisting[language=bash]{ChA_3/example_select.sh}
 Uruchamiając taki skrypt, wyświetlone zostanie pytanie oraz 3 opcje do wyboru: \newline
 \begin{verbatim}
 [czaja@vaio][~] $ sh example_select.sh
@@ -236,12 +194,13 @@ wypadku \texttt{ls -la}) dla tej zmiennej. Za poleceniem \texttt{ls} znajduje si
  
 \section{Zastosowanie case i select}
 Problem przytoczony przy omawianiu instrukcji case, można uprościć dodając instrukcję select. \newline
-\lstinputlisting[language=bash]{example_cs.sh}
+\lstinputlisting[language=bash]{ChA_3/example_cs.sh}
 %TODO: Add comment.
 
 \section{Zadanie}
-Napisz skrypt, który będzie prosił użytkownika o podanie liczb w zakresie 1-7, którym mają być przypisane  odpowiednie dni tygodnia. Po wprowadzeniu złej wartości program ma wyświetlić komunikat „nieobsługiwana wartość”. Program należy zrealizować:\\
-	a) wykorzystując tylko instrukcję if,\\
-	b) wykorzystując tylko instrukcję case,\\
-	c) wykorzystując case + select.
-\end{document}
+Napisz skrypt, który będzie prosił użytkownika o podanie liczb w zakresie 1-7, którym mają być przypisane  odpowiednie dni tygodnia. Po wprowadzeniu złej wartości program ma wyświetlić komunikat „nieobsługiwana wartość”. Program należy zrealizować:
+\begin{enumerate}[a)]
+\item wykorzystując tylko instrukcję if,
+\item wykorzystując tylko instrukcję case,
+\item wykorzystując case + select.
+\end{enumerate}
