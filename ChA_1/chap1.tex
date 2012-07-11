@@ -29,13 +29,31 @@ W skrypcie zamieściliśmy tylko częściowy opis poleceń - bardziej szczegół
 W przypadku gdy chcemy dowiedzieć się jak działa polecenie, lub sprawdzić sposób jego wywołania możemy spróbować wywołać polecenie z przełącznikiem \textbf{-?} lub \textbf{--help}. Wiele programów wyświetla wtedy bardzo ogólną informację o dostępnych przełącznikach, ich działaniu i sposobie wywołania programu. Czasem jednak potrzebujemy bardziej rozbudowanej dokumentacji - wtedy warto spróbować skorzystać z polecenia \texttt{man}(\textit{ang.} \textbf{man}ual).
 
 \subsubsection{info}
+Tak jak \texttt{man}, \texttt{info} również wyświetla pomoc dotyczącą polecenia. W przeciwieństwie do poprzedniego programu, \texttt{info} jest bardziej intuicyjnym programem, który jest niestety nieco mniej popularny --- bardzo możliwe że polecenie, którego pomoc będziemy chcieli przeczytać, będzie posiadało ją dostępną poprzez czytnik \texttt{man} zamiast poprzez czytnik \texttt{info}. Mimo to warto wiedzieć o jego istnieniu, chociażby ze względu na interaktywne spisy treści, dzięki którym szybko przeniesiemy się do konkretnego miejsca w tekście.
 
 \subsubsection{apropos}
-W przypadku gdy chcemy coś zrobić, ale nie wiemy jakiego polecenia użyć, możemy skorzystać z polecenia \texttt{apropos}. Jako argument wywołania podajemy wówczas frazę jakiej poszukujemy w instrukcji, a \texttt{apropos} przeszuka wszystkie dostępne na dysku instrukcje pod kątem tejże frazy. Przykładowo, jeżeli chcielibyśmy dowiedzieć się jakie polecenie odpowiada za tworzenie katalogu  użyjemy nowo poznanej komendy z argumentem \textit{tworzy katalog}:
+W przypadku gdy chcemy coś zrobić, ale nie wiemy jakiego polecenia użyć, możemy skorzystać z polecenia \texttt{apropos}. Jako argument wywołania podajemy wówczas frazę jakiej poszukujemy w instrukcji, a \texttt{apropos} przeszuka wszystkie dostępne na dysku instrukcje pod kątem tejże frazy. Przykładowo, jeżeli chcielibyśmy dowiedzieć się jakie polecenie odpowiada za tworzenie katalogu użyjemy nowo poznanej komendy z argumentem \textit{tworzy katalog}:
 \newline
-%TODO add this
+\begin{verbatim}
+beton@megas:~$ apropos tworzy katalog
+catman (8)           - tworzy lub aktualizuje preformatowane strony podręcznika man
+create_module (2)    - tworzy wpis ładowalnego modułu
+ln (1)               - tworzy dowiązania między plikami
+mandb (8)            - tworzy lub aktualizuje bufory indeksowe stron man.
+mkdir (1)            - tworzy katalogi
+mke2fs (8)           - tworzy linuksowy system plików ext2/3
+mkfifo (1)           - tworzy FIFO (potoki nazwane)
+\end{verbatim}
+Jak widać polecenie przeszukało instrukcje pod kątem słów ,,tworzy'' oraz ,,katalog''. Jeżeli będziemy chcieli znaleźć całą frazę, to musimy umieścić ją w cudzysłowach np:
+\newline
+\begin{verbatim}
+beton@megas:~$ apropos "tworzy katalog"
+mkdir (1)            - tworzy katalogi
+\end{verbatim}
+Zawęziło to trochę listę wyników, nieprawdaż? Warto zapoznać się z dokumentacją komendy, ponieważ w skrypcie nie poruszymy jej przełączników i dodatkowych ustawień, a ich działanie może Ci kiedyś pomóc w znalezieniu tego jednego, \emph{właściwego} programu.
 
 \subsection{Uprawnienia do plików}
+\label{sec:uprawnienia}
 Zanim zaczniemy przeglądać zawartość dysku twardego, powinniśmy Ci wcześniej wytłumaczyć czym są uprawnienia dostępu\index{uprawnienia dostępu} do plików i wyjaśnić dlaczego są one tak istotne podczas codziennej pracy.
 \newline
 \newline
@@ -111,7 +129,6 @@ Symbol & Opis \\ \hline
 \end{center}
 \end{table}
 
-%TODO Should fix table positions
 \FloatBarrier
 
 Uprawnienia określamy za pomocą znaków, tak jak jest to przedstawione w tabeli na stronie \pageref{tab:uprawnienia}. Dla lepszego zrozumienia posłużymy się przykładem - dodamy teraz uprawnienia czytania pliku \textit{koza} pozostałym użytkownikom.
@@ -242,7 +259,7 @@ Ostatnim podejściem które będziemy stosować jest podawanie adresu względneg
 /bin
 [beton@xps bin]$ 
 \end{verbatim}
-Istotną rzeczą o której należy pamiętać przy wykonywaniu plików jest posiadanie uprawnień do wykonywania danego programu - jeżeli nie będziemy ich posiadać, to wywołanie zakończy się błędem (o uprawnieniach możesz przeczytać w rozdziale ...) %TODO add reference to the section containing file rights.
+Istotną rzeczą o której należy pamiętać przy wykonywaniu plików jest posiadanie uprawnień do wykonywania danego programu - jeżeli nie będziemy ich posiadać, to wywołanie zakończy się błędem (o uprawnieniach możesz przeczytać w rozdziale \ref{sec:uprawnienia}).
 \newline
 \newline
 Wywoływanie skryptów Basha odbywa się podobnie - możemy próbować uruchomić go tak jak plik wykonywalny, jednak powiedzie się to tylko jeśli będziemy posiadali do tego prawa. Jeśli jednak okaże się, że tak nie jest, możesz spróbować innego wywołania. Podając przed nazwą skryptu, nazwę interpretera który ma wykonać nasz kod możemy uruchomić program bez większych problemów. Przykładowo interpreterem z którego będziemy korzystać będzie interpreter \texttt{bash}. Załóżmy, że posiadamy skrypt o nazwie \textit{Hello.sh} (program będzie jedynie wyświetlał na ekranie tekst 
@@ -291,9 +308,10 @@ Jak już wcześniej wspomniałem, \texttt{mv} jest wywoływany z co najmniej dwo
 \begin{verbatim}
 [beton@xps ~]$ mv plik1 plik2 plik3 katalog_na_pliki/
 \end{verbatim}
-%TODO write about mv
 \subsubsection*{Przykładowe przełączniki}
-%TODO add switches
+\begin{description}
+\item \textbf{-u} lub \textbf{--update} powoduje przenoszenie tylko gdy przenoszony plik jest nowszy niż plik docelowy lub gdy plik docelowy nie istnieje.
+\end{description}
 
 \subsection{cp}
 Jeżeli zechcemy skopiować pliki lub katalogi, z pomocą przyjdzie nam polecenie \texttt{cp} (\textit{ang.} \textbf{c}o\textbf{p}y files and directories). Obsługa polecenia jest bardzo podobna do obsługi \texttt{mv} - identyczne jest wywołanie, w którym podajemy najpierw nazwę polecenia, następnie plik źródłowy i plik do którego ma zostać on skopiowany. Możliwe jest także skopiowanie kilku plików naraz, jednak wtedy zamiast pliku docelowego należy podać katalog, w którym zostaną umieszczone kopie. Poniższy kod zademonstruje sytuację w której skopiujemy 4 pliki do jednego katalogu.
@@ -310,11 +328,14 @@ cp: cel `p5' nie jest katalogiem
 [beton@xps tmp]$ 
 \end{verbatim}
 \subsubsection*{Przykładowe przełączniki}
+%TODO add switches
 
 \subsection{rm}
 Do skasowania plików używamy polecenia \texttt{rm}(\textit{ang.} \textbf{r}e\textbf{m}ove)
 \subsubsection*{Przykładowe przełączniki}
-%TODO add switches
+\begin{description}
+\item \textbf{-r} lub \textbf{-R} lub \textbf{--recursive} usuwanie rekursywne, działa także na katalogi posiadające zawartość.
+\end{description}
 
 \subsection{mkdir}
 Odpowiednikiem dla polecenia touch do tworzenia jest polecenie \texttt{mkdir} (\textit{ang.} \textbf{m}a\textbf{k}e \textbf{dir}ectories. Aby utworzyć przykładowy katalog \textit{koza} za pomocą wiersza poleceń skorzystamy z komendy:
