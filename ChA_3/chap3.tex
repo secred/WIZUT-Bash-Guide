@@ -1,8 +1,7 @@
 \chapter{Wyrażenia warunkowe}
 W tym rozdziale dowiemy się o wyrażeniach warunkowych. Wyrażenia warunkowe jako część języka skryptowego bash, pozwalają na wykonywanie przydzielonych instrukcji w zależności od wyboru użytkownika, aplikacji lub sprawdzenia czy zdefiniowane zapytanie będzie prawdą lub fałszem. Możliwość warunkowego decydowania o wykonywanym kroku jest bardzo istotna, zdecydowania większość algorytmów jej wymaga.
 \section{if}
-\subsection{Wstęp}
-Instrukcja warunkowa if jest jedną z najpopularniejszych instrukcji. Bez niej tworzenie aplikacji opartych na wyborach w zależności od sytuacji byłoby bardzo uciążliwe.
+Instrukcja warunkowa if\index{if} jest jedną z najpopularniejszych instrukcji. Bez niej tworzenie aplikacji opartych na wyborach w zależności od sytuacji byłoby bardzo uciążliwe.
 \subsection{Składnia}
 Podstawowa składnia wygląda następująco:
 \begin{lstlisting}
@@ -36,7 +35,7 @@ fi
 
 \subsection{Sprawdzanie warunków}
 %\subsection{Wstęp}
-Sprawdzanie warunków w bashu jest bardzo elastyczne - służy do tego komenda \texttt{test}. Ponieważ występuje ona jako polecenie powłoki, nie powinno się nazywać tak skryptów, ponieważ nie będą działać. Działanie polecenia \texttt{test} jest bardzo proste:\\
+Sprawdzanie warunków w bashu jest bardzo elastyczne - służy do tego komenda \texttt{test}\index{test}. Ponieważ występuje ona jako polecenie powłoki, nie powinno się nazywać tak skryptów, ponieważ nie będą działać. Działanie polecenia \texttt{test} jest bardzo proste:\\
 Jeżeli warunek zostanie wykonany polecenie test zwróci wartość 0 (true).\\
 Jeżeli warunek nie zostanie wykonany polecenie test zwróci wartość 1 (false).\\\\
 Sprawdzanie warunków jest bardzo mocno powiązane z instrukcją \texttt{if}. Składnia wygląda następująco:
@@ -133,12 +132,11 @@ Istnieją także inne polecenia złożone, które nie są używane jako warunki 
 Jeśli chcesz dowiedzieć się więcej - poszukaj Poleceń złożonych w manualu basha.
 
 \section{case}
-\subsection{Wstęp}
 %TODO: Change this text
 Wyobraźmy sobie sytuację, gdzie mamy za zadanie napisanie prostego menu z kilkoma
 opcjami do wyboru, rozwiązanie problemu wyboru opcji na warunku if wydaje się
 bezsensowne ze względu na zmuszenie do zapisania dużej ilości if`ów co powoduje brak
-czytelności kodu. Rozwiązanie tego problemu za pomocą instrukcji case będzie o wiele
+czytelności kodu. Rozwiązanie tego problemu za pomocą instrukcji case\index{case} będzie o wiele
 lepszym i czytelniejszym rozwiązaniem.
 
 \subsection{Składnia}
@@ -166,6 +164,7 @@ czegokolwiek innego spowoduje wyświetlenie \texttt{Bledny wybor}.
 
 \section{select}
 %TODO: Add intro.
+\index{select}
 \subsection{Składnia}
 
 \begin{lstlisting}
