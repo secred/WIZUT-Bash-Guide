@@ -9,9 +9,12 @@
 \usepackage{hyperref}
 \usepackage{listings}
 \usepackage{enumitem}
-\usepackage{enumerate}
+\usepackage{multicol}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
 \usepackage{common/czaja_style}
 \usepackage{placeins}	%provides \FloatBarrier command - helps to place floats in right position
+
 
 \author{SKN SECred} %enter names after the document is completed
 \newcommand{\doctitle}{WIZUT Bash Guide} %Prints title
@@ -19,12 +22,14 @@
 \makeindex
 
 \begin{document}
+\pagenumbering{Roman}
 \maketitle
 \tableofcontents
+\clearpage
 
+\pagenumbering{arabic}
 %chap1
 \include{ChA_1/chap1}
-
 %chap2
 \include{ChA_2/chap2}
 %chap3
@@ -32,7 +37,7 @@
 %chap4
 %\include{ChA_4/chap4}
 %chap5
-%\include{ChA_5/chap5}
+\include{ChA_5/chap5}
 %chap6
 %\include{ChA_6/chap6}
 %chap7

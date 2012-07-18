@@ -240,6 +240,7 @@ Kolejnym przełącznikiem jaki wyróżnimy poprzez pokazanie Ci jego działania,
 \end{description}
 
 \subsection{uruchamianie skryptów i plików wykonywalnych}
+\label{sec:uruchamianie}
 Uruchamianie programów może się odbywać na kilka sposobów, z jednego z nich korzystaliśmy nawet kilka razy podczas opisywania poleceń powyżej. Jeżeli katalog w którym znajduje się nasz program jest dopisany do zmiennej środowiskowej \texttt{PATH} (co to jest zmienna środowiskowa wyjaśnimy Ci później), to wystarczy podać nazwę pliku, a program się wykona. Dokładnie w taki sposób wywoływaliśmy polecenie \texttt{pwd}. Dla zademonstrowania działania zmiennej środowiskowej wyświetlę Ci jej przykładową zawartość (o wyświetlaniu tekstu na ekranie konsoli dowiesz się w następnych rozdziałach).
 \begin{verbatim}
 [beton@xps ~]$ echo $PATH
@@ -262,10 +263,10 @@ Ostatnim podejściem które będziemy stosować jest podawanie adresu względneg
 Istotną rzeczą o której należy pamiętać przy wykonywaniu plików jest posiadanie uprawnień do wykonywania danego programu - jeżeli nie będziemy ich posiadać, to wywołanie zakończy się błędem (o uprawnieniach możesz przeczytać w rozdziale \ref{sec:uprawnienia}).
 \newline
 \newline
-Wywoływanie skryptów Basha odbywa się podobnie - możemy próbować uruchomić go tak jak plik wykonywalny, jednak powiedzie się to tylko jeśli będziemy posiadali do tego prawa. Jeśli jednak okaże się, że tak nie jest, możesz spróbować innego wywołania. Podając przed nazwą skryptu, nazwę interpretera który ma wykonać nasz kod możemy uruchomić program bez większych problemów. Przykładowo interpreterem z którego będziemy korzystać będzie interpreter \texttt{bash}. Załóżmy, że posiadamy skrypt o nazwie \textit{Hello.sh} (program będzie jedynie wyświetlał na ekranie tekst 
+Wywoływanie skryptów Basha odbywa się podobnie - możemy próbować uruchomić go tak jak plik wykonywalny, jednak powiedzie się to tylko jeśli będziemy posiadali do tego prawa. Jeśli jednak okaże się, że tak nie jest, możesz spróbować innego wywołania. Podając przed nazwą skryptu, nazwę interpretera który ma wykonać nasz kod możemy uruchomić program bez większych problemów. Przykładowo interpreterem z którego będziemy korzystać będzie interpreter \texttt{bash}. Załóżmy, że posiadamy skrypt o nazwie \textit{hello\_world.sh} (program będzie jedynie wyświetlał na ekranie tekst 
 "\textit{Hello world!}") i chcemy go uruchomić w poznany przed chwilą sposób.
 \begin{verbatim}
-[beton@xps tmp]$ bash Hello.sh 
+[beton@xps tmp]$ bash hello_world.sh 
 Hello world!
 \end{verbatim} 
 Wsród uprawnień jakie były przypisane do pliku nie było praw wykonywania, co możesz zobaczyć na poniższym listingu.

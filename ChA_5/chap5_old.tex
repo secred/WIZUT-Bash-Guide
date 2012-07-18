@@ -1,0 +1,56 @@
+\documentclass[10 pt, a4paper]{article}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{verbatim}
+\usepackage{listings}
+
+\usepackage{color}
+\usepackage{textcomp}
+\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+\lstset{
+	%backgroundcolor=\color{lbcolor},
+	tabsize=4,
+	%rulecolor=,
+    %basicstyle=\scriptsize,
+    upquote=true,
+    aboveskip={1.5\baselineskip},
+    columns=fixed,
+    showstringspaces=false,
+    extendedchars=true,
+    breaklines=true,
+    %frame=single,
+    showtabs=false,
+    showspaces=false,
+    showstringspaces=false,
+    identifierstyle=\ttfamily,
+    numbers=left, 
+    numberstyle=\tiny, 
+    stepnumber=1, 
+    numbersep=5pt,
+}
+%TODO: Configure listing.
+
+\author{Krzysztof Czajkowski}
+\title{WIZUT Bash Guide - Rozdział V\\
+Podstawy programowania proceduralnego}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+\section{Wstęp}
+W tym rozdziale dowiemy się, jakie korzyści płyną z używania funkcji, kiedy warto ich używać oraz ja je tworzyć.
+\section{Dlaczego warto używać funkcji}
+Czasami w skrypcie zdarza się, że kod wielokrotnie powtarza się. Aby uprościć jego użycie
+oraz poprawić czytelność kodu można użyć funkcji, są to małe "podskrypty" działające w
+ramach głównego skryptu.
+\section{Tworzenie własnej funkcji}
+\subsection{Składnia}
+\begin{lstlisting}
+function nazwa(){
+	Zestaw instrukcji;
+}
+\end{lstlisting}
+\section{Różnice w argumentach przekazywanych do funkcji a do skryptu}
+
+\end{document}
